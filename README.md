@@ -42,6 +42,7 @@ La paleta de colores utilizada en este proyecto es la siguiente:
     CAF4FF: Azul muy claro
     A0DEFF: Azul claro
     5AB2FF: Azul
+    DCF2F1: Fondo Azul grisaceo
 
 Logo
 
