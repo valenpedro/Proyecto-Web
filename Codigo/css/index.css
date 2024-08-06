@@ -1,15 +1,20 @@
-*{
+* {
     box-sizing: border-box;
 }
 
-html,
-body {
+html {
+    background-color: #22d3ca;
+}
+
+html, body {
     margin: 0;
     padding: 0;
     font-family: 'Inter', sans-serif;
+    /*background-color: #DCF2F1; /* Fondo azul */
+    background-color: transparent;
 }
 
-#header  {
+#header {
     width: 100%;
     height: 100vh;
     background-image: url('../images/barra.png'); /* Cambia esto a la ruta de tu imagen */
@@ -17,16 +22,20 @@ body {
     background-position: center; /* Esto centra la imagen */
     background-repeat: no-repeat; /* Evita que la imagen se repita */
     background-attachment: fixed; /* Esto hace que la imagen permanezca fija */
+    top: 0;
+    left: 0;
+    position: fixed;
+    z-index: -1; /* Asegura que el header esté detrás de todo */
 }
 
-#header ul{
+#header ul {
     display: flex;
     padding: 50px; /* Ajusta este valor para ajustar el espacio entre los elementos */
     gap: 15px; /* Ajusta este valor para ajustar el espacio entre los elementos */
     justify-content: end;
 }
 
-#header ul li{
+#header ul li {
     list-style: none;
     font-size: 18px;
     font-weight: 500;
@@ -67,17 +76,19 @@ body {
     transition: background-color 0.3s ease;
 }
 
-#logo img{
+#logo img {
     width: 530px;
     height: 300px;
     margin-top: -15px;
     position: fixed;
+    z-index: 1; /* Asegura que el logo esté por encima del header */
 }
 
 main {
     align-items: center; /* Centrado vertical */
     justify-content: center; /* Centrado horizontal */
     z-index: 2; /* Asegurar que el main esté por encima del header */
+    position: relative; /* Necesario para que z-index funcione */
 }
 
 main h1 {
@@ -89,37 +100,38 @@ main h1 {
     text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); /* Sombra del texto */
     margin: 0;
     margin-right: 50px;
-    margin-top: -580px;
+    margin-top: 200px;
+    position: relative; /* Necesario para que z-index funcione */
+    z-index: 2;
 }
 
-#perro_gato img{
+#perro_gato img {
     width: 750px;
     height: 710px;
-    margin-top: -225px;
+    margin-top: -100px;
     margin-left: 230px;
-    position: fixed;
+    position: relative; /* Necesario para que z-index funcione */
+    z-index: 2; /* Asegura que no sea cubierto */
 }
 
-main p{
+main p {
     font-size: 23.5px;
     font-weight: 300;
     line-height: 1.5;
     color: #0F1035;
-
     text-align: right;
-    z-index: 2;
     max-width: 50%;
-    text-align: right; /* Texto alineado a la derecha */
     position: absolute;
-    top: 50%; /* Ajustar la posición */
+    top: 50%;
     right: 50px;
+    z-index: 2; /* Asegura que no sea cubierto */
+    margin-top: -150px;
 }
 
 main .btn-testimonios {
-
-    margin-top: 220px;
+    margin-top: -300px;
     margin-left: 1470px;
-    position: fixed;
+    position: absolute;
     text-decoration: none;
     background-color: #0F1035;
     color: #FBF3F3;
@@ -127,15 +139,16 @@ main .btn-testimonios {
     font-size: 23px;
     padding: 10px 20px;
     font-weight: 600;
+    z-index: 2; /* Asegura que no sea cubierto */
 }
 
 .social-icons {
-    position: absolute;
+    position: fixed;
     bottom: 20px; /* Ajusta según sea necesario */
     right: 40px;
     display: flex;
     gap: 20px;
-    z-index: 10; /* Asegura que estén visibles */
+    z-index: 1001; /* Asegura que estén visibles */
 }
 
 .social-icons img {
