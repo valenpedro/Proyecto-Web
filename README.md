@@ -1,13 +1,29 @@
-# Dogin
+# Dogin Veterinaria - Sistema de Gestión
 
-## Descripción del Proyecto
-Dogin es una plataforma web diseñada para ofrecer servicios veterinarios de alta calidad. Nuestro objetivo es conectar a los dueños de mascotas con veterinarios y paseadores de perros de confianza. A través de nuestra plataforma, los usuarios pueden programar citas, monitorear el estado de sus mascotas en tiempo real y acceder a una variedad de servicios personalizados para garantizar el bienestar de sus mascotas.
+Logo de Dogin, no se como ponerlo jiji 
 
-## Características Principales
-- **Conexión entre dueños y paseadores:** Facilita la búsqueda y contratación de paseadores de perros.
-- **Visibilidad y disponibilidad de paseadores:** Información clara y accesible sobre la disponibilidad de paseadores.
-- **Monitoreo en tiempo real:** Chat y GPS para seguimiento de paseos.
-- **Servicios Veterinarios:** Programación de citas y consultas en línea con veterinarios.
+
+## Descripción
+
+Dogin es una clínica veterinaria especializada en perros y gatos que ofrece servicios de hospitalización y tratamiento. Este proyecto implementa un sistema web integral para digitalizar y optimizar las operaciones de Dogin, mejorando la gestión de pacientes, tratamientos y la experiencia del cliente.
+
+## Características
+
+- **Landing Page**: Promoción de servicios veterinarios.
+- **Portal de Clientes**: Seguimiento del estado de las mascotas.
+- **Portal de Veterinarios**: Gestión de pacientes y tratamientos.
+- **Portal de Administrador**: Análisis de datos y gestión de personal.
+- **Base de Datos**: Almacenamiento seguro de información de clientes, mascotas y tratamientos.
+
+## Tecnologías Utilizadas
+
+- Frontend: React
+- Backend: Spring Boot
+- Base de Datos: PostgreSQL, MongoDB
+
+## Instalación
+
+1. Clonar el repositorio:
 
 ## Estructura del Proyecto
 El proyecto consta de los siguientes archivos principales:
