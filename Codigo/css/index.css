@@ -1,257 +1,261 @@
 * {
-    box-sizing: border-box;
-    background-color: #dcf2f1;
-  }
-  
-  html,
-  body {
-    margin: 0;
-    padding: 0;
-    font-family: "Inter", sans-serif;
-  }
-  
-  #header ul {
-    display: flex;
-    padding: 50px; /* Ajusta este valor para ajustar el espacio entre los elementos */
-    gap: 15px; /* Ajusta este valor para ajustar el espacio entre los elementos */
-    justify-content: end;
-    position: fixed;
-    margin-left: 782px;
-    margin-top: -285px;
-    background-color: transparent;
-  }
-  
-  #header ul li {
-    list-style: none;
-    font-size: 18px;
-    font-weight: 500;
-    color: #fff;
-    cursor: pointer;
-    background-color: transparent;
-  }
-  
-  #header ul li a:hover {
-    background-color: #0f1035; /* Hover background */
-    color: #fbf3f3; /* Hover text color */
-  }
-  
-  #header ul li a.button {
-    border: 1px solid #365486; /* Borde para 'Iniciar Sesión' */
-    padding: 10px 20px; /* Padding ajustado */
-    border-radius: 40px;
-    background-color: #3654861c; /* Hover permanente para 'Iniciar Sesión' */
-    color: #365486; /* Color de texto */
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: background-color 0.3s ease, color 0.3s ease;
-    margin-top: -10px; /* Alinear con los otros elementos */
-  }
-  
-  #header ul li a.button:hover {
-    background-color: #0f1035; /* Hover background */
-    color: #fbf3f3; /* Hover text color */
-  }
-  
-  #header ul li a {
-    text-decoration: none;
-    color: #365486; /* Color de letra de la navbar */
-    font-size: 23px; /* Tamaño de fuente ajustado */
-    font-weight: 600;
-    padding: 10px 20px;
-    border-radius: 10px;
-    transition: background-color 0.3s ease;
-  }
-  
-  #logo img {
-    width: 530px;
-    height: 300px;
-    margin-top: -230px;
-    margin-top: auto;
-  }
-  
-  main {
-    align-items: center; /* Centrado vertical */
-    justify-content: center; /* Centrado horizontal */
-    z-index: 2; /* Asegurar que el main esté por encima del header */
-  }
-  
-  main h1 {
-    font-size: 70px;
-    font-weight: 900;
-    line-height: 80px;
-    text-align: right;
-    color: #0f1035;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); /* Sombra del texto */
-    margin: 0;
-    margin-right: 50px;
-    margin-top: -75px;
-  }
-  
-  .servicios {
-    text-align: center;
-    margin-top: 105px;
-    font-size: 40px;
-    font-weight: 900;
-    line-height: 80px;
-    color: #0f1035;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); /* Sombra del texto */
-  }
-  
-  .sobre {
-    margin-top: 70px;
-  }
-  
-  .testimonios {
-    margin-top: -40px;
-  }
-  
-  .contacto {
-    margin-top: 90px;
-  }
-  
-  .sobre,
-  .testimonios,
-  .contacto {
-    text-align: center;
-    font-size: 40px;
-    font-weight: 900;
-    line-height: 80px;
-    color: #0f1035;
-    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); /* Sombra del texto */
-    margin-right: 150px;
-  }
-  
-  .descripcion {
-    font-size: 22px;
-    font-weight: 350;
-    line-height: 1.5;
-    color: #0f1035;
-    text-align: right;
-    z-index: 2;
-    max-width: 50%;
-    text-align: right; /* Texto alineado a la derecha */
-    position: absolute;
-    top: 53%; /* Ajustar la posición */
-    right: 50px;
-    background-color: transparent;
-  }
-  
-  .aboutUs {
-    top: 197%;
-  }
-  
-  .aboutUs2 {
-    top: 221%;
-  }
-  
-  .aboutUs3 {
-    top: 241%;
-  }
-  
-  .aboutUs,
-  .aboutUs2,
-  .aboutUs3 {
-    background-color: transparent;
-    font-size: 22px;
-    font-weight: 350;
-    line-height: 1.5;
-    color: #0f1035;
-    z-index: 2;
-    max-width: 50%;
-    position: absolute;
-    left: 620px;
-  }
-  
-  .btn-testimonios {
-    display: flex; /* Asegúrate de que sea un bloque */
-    margin-top: 200px; /* Ajusta según necesites */
-    margin-left: 1485px; /* Ajusta según necesites */
-    text-decoration: none;
-    background-color: #0f1035;
-    color: #f0eded;
-    border-radius: 10px;
-    font-size: 23px;
-    padding: 10px 10px;
-    font-weight: 600;
-    width: 155px;
-  }
-  
-  .social-icons {
-    position: fixed; /* Cambiado a fixed */
-    bottom: 20px; /* Mantener 20px desde el fondo */
-    right: 40px; /* Mantener 40px desde la derecha */
-    display: flex;
-    gap: 20px; /* Espaciado entre los iconos */
-    z-index: 10; /* Asegura que estén visibles */
-  }
-  
-  .social-icons img {
-    width: 35px; /* Ajusta el tamaño de los iconos según sea necesario */
-    height: auto; /* Mantener la proporción de los iconos */
-  }
-  
-  .card {
-    margin-top: 20px;
-    height: 500px;
-    overflow: hidden; /* Opcional: Asegura que el contenido no se desborde */
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Opcional: Añade una sombra a la tarjeta */
-  }
-  
-  .card-text {
-    text-align: center;
-    margin-left: -300px;
-  }
-  
-  .infoDogin {
-    width: 680px; /* Ajusta el tamaño según sea necesario */
-    height: 680px; /* Asegúrate de que el ancho y alto sean iguales para mantener la forma circular */
-    object-fit: cover; /* Asegura que la imagen cubra el área del círculo sin distorsionarse */
-    margin-left: 10px;
-    margin-top: -120px;
-    background-color: transparent;
-  }
-  
-  .card-title {
-    text-align: center;
-    color: #365486;
-  }
-  
-  .card-text {
-    font-size: 19px;
-    text-align: justify;
-    margin-left: 10px;
-    margin-right: 10px;
-    color: #0f1035;
-  }
-  
-  #carouselExampleIndicators {
-    width: 80%; /* Ajusta este valor según el ancho que desees */
-    margin: 0 auto; /* Centra el carrusel en la página */
-  }
-  
-  .carousel-inner img {
-    border-radius: 10px;
-    max-width: 50%; /* Asegura que las imágenes no se salgan del contenedor */
-    height: auto; /* Mantiene la proporción de las imágenes */
-    margin-left: 300px;
-  }
-  
-  .carousel-control-prev-icon,
-  .carousel-control-next-icon {
-    filter: invert(100%); /* Cambia el color de las flechas si es necesario */
-    margin-left: -70px;
-  }
-  
-  .nombreTestimonio, .nombreTestimonio2,.nombreTestimonio3 {
-      color:#365486; /* Cambia 'blue' por el color que desees */
-      text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Sombra opcional para mejorar la legibilidad */
-      margin-left: -70px;
-      background-color: transparent;
-  }
-  
-  .descrip1, .descrip2, .descrip3 {
-      color:#0f1035;
-      font-size: 15px;
-      background-color: transparent;
-  }  
+  box-sizing: border-box;
+  background-color: #dcf2f1;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+}
+
+#header ul {
+  display: flex;
+  padding: 50px; /* Ajusta este valor para ajustar el espacio entre los elementos */
+  gap: 15px; /* Ajusta este valor para ajustar el espacio entre los elementos */
+  justify-content: end;
+  position: fixed;
+  margin-left: 782px;
+  margin-top: -285px;
+  background-color: transparent;
+}
+
+#header ul li {
+  list-style: none;
+  font-size: 18px;
+  font-weight: 500;
+  color: #fff;
+  cursor: pointer;
+  background-color: transparent;
+}
+
+#header ul li a:hover {
+  background-color: #0f1035; /* Hover background */
+  color: #fbf3f3; /* Hover text color */
+}
+
+#header ul li a.button {
+  border: 1px solid #365486; /* Borde para 'Iniciar Sesión' */
+  padding: 10px 20px; /* Padding ajustado */
+  border-radius: 40px;
+  background-color: #3654861c; /* Hover permanente para 'Iniciar Sesión' */
+  color: #365486; /* Color de texto */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  margin-top: -10px; /* Alinear con los otros elementos */
+}
+
+#header ul li a.button:hover {
+  background-color: #0f1035; /* Hover background */
+  color: #fbf3f3; /* Hover text color */
+}
+
+#header ul li a {
+  text-decoration: none;
+  color: #365486; /* Color de letra de la navbar */
+  font-size: 23px; /* Tamaño de fuente ajustado */
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 10px;
+  transition: background-color 0.3s ease;
+}
+
+#logo img {
+  width: 530px;
+  height: 300px;
+  margin-top: -230px;
+  margin-top: auto;
+}
+
+main {
+  align-items: center; /* Centrado vertical */
+  justify-content: center; /* Centrado horizontal */
+  z-index: 2; /* Asegurar que el main esté por encima del header */
+}
+
+main h1 {
+  font-size: 70px;
+  font-weight: 900;
+  line-height: 80px;
+  text-align: right;
+  color: #0f1035;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); /* Sombra del texto */
+  margin: 0;
+  margin-right: 50px;
+  margin-top: -75px;
+}
+
+.servicios {
+  text-align: center;
+  margin-top: 105px;
+  font-size: 40px;
+  font-weight: 900;
+  line-height: 80px;
+  color: #0f1035;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); /* Sombra del texto */
+}
+
+.sobre {
+  margin-top: 70px;
+}
+
+.testimonios {
+  margin-top: -40px;
+}
+
+.contacto {
+  margin-top: 90px;
+}
+
+.sobre,
+.testimonios,
+.contacto {
+  text-align: center;
+  font-size: 40px;
+  font-weight: 900;
+  line-height: 80px;
+  color: #0f1035;
+  text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25); /* Sombra del texto */
+  margin-right: 150px;
+}
+
+.descripcion {
+  font-size: 22px;
+  font-weight: 350;
+  line-height: 1.5;
+  color: #0f1035;
+  text-align: right;
+  z-index: 2;
+  max-width: 50%;
+  text-align: right; /* Texto alineado a la derecha */
+  position: absolute;
+  top: 53%; /* Ajustar la posición */
+  right: 50px;
+  background-color: transparent;
+}
+
+.aboutUs {
+  top: 197%;
+}
+
+.aboutUs2 {
+  top: 221%;
+}
+
+.aboutUs3 {
+  top: 241%;
+}
+
+.aboutUs,
+.aboutUs2,
+.aboutUs3 {
+  background-color: transparent;
+  font-size: 22px;
+  font-weight: 350;
+  line-height: 1.5;
+  color: #0f1035;
+  z-index: 2;
+  max-width: 50%;
+  position: absolute;
+  left: 620px;
+}
+
+.btn-testimonios {
+  display: flex; /* Asegúrate de que sea un bloque */
+  margin-top: 200px; /* Ajusta según necesites */
+  margin-left: 1485px; /* Ajusta según necesites */
+  text-decoration: none;
+  background-color: #0f1035;
+  color: #f0eded;
+  border-radius: 10px;
+  font-size: 23px;
+  padding: 10px 10px;
+  font-weight: 600;
+  width: 155px;
+}
+
+.social-icons {
+  position: fixed; /* Cambiado a fixed */
+  bottom: 20px; /* Mantener 20px desde el fondo */
+  right: 40px; /* Mantener 40px desde la derecha */
+  display: flex;
+  gap: 20px; /* Espaciado entre los iconos */
+  z-index: 10; /* Asegura que estén visibles */
+}
+
+.social-icons img {
+  width: 35px; /* Ajusta el tamaño de los iconos según sea necesario */
+  height: auto; /* Mantener la proporción de los iconos */
+}
+
+.card {
+  margin-top: 20px;
+  height: 500px;
+  overflow: hidden; /* Opcional: Asegura que el contenido no se desborde */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Opcional: Añade una sombra a la tarjeta */
+}
+
+.card-text {
+  text-align: center;
+  margin-left: -300px;
+}
+
+.infoDogin {
+  width: 680px; /* Ajusta el tamaño según sea necesario */
+  height: 680px; /* Asegúrate de que el ancho y alto sean iguales para mantener la forma circular */
+  object-fit: cover; /* Asegura que la imagen cubra el área del círculo sin distorsionarse */
+  margin-left: 10px;
+  margin-top: -120px;
+  background-color: transparent;
+}
+
+.card-title {
+  text-align: center;
+  color: #365486;
+}
+
+.card-text {
+  font-size: 19px;
+  text-align: justify;
+  margin-left: 10px;
+  margin-right: 10px;
+  color: #0f1035;
+}
+
+#carouselExampleIndicators {
+  width: 80%; /* Ajusta este valor según el ancho que desees */
+  margin: 0 auto; /* Centra el carrusel en la página */
+}
+
+.carousel-inner img {
+  border-radius: 10px;
+  max-width: 50%; /* Asegura que las imágenes no se salgan del contenedor */
+  height: auto; /* Mantiene la proporción de las imágenes */
+  margin-left: 300px;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  filter: invert(100%); /* Cambia el color de las flechas si es necesario */
+  margin-left: -70px;
+}
+
+.nombreTestimonio,
+.nombreTestimonio2,
+.nombreTestimonio3 {
+  color: #365486; /* Cambia 'blue' por el color que desees */
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.5); /* Sombra opcional para mejorar la legibilidad */
+  margin-left: -70px;
+  background-color: transparent;
+}
+
+.descrip1,
+.descrip2,
+.descrip3 {
+  color: #0f1035;
+  font-size: 15px;
+  background-color: transparent;
+}
