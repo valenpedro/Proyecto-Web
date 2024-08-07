@@ -1,6 +1,6 @@
 # Dogin Veterinaria - Sistema de Gestión
 
-Logo de Dogin, no se como ponerlo jiji 
+![Logo Nata DOGIN](https://github.com/user-attachments/assets/a199e284-e754-43c7-8085-1a64ec770b4c)
 
 
 ## Descripción
