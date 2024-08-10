@@ -1,0 +1,127 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #DCF2F1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    position: relative;
+}
+
+.container {
+    width: 290%;
+    max-width: 500px;
+    padding: 20px;
+    position: relative;
+    background-color: transparent;
+}
+
+.login-box {
+    background-color: #ffffff;
+    border-radius: 30px;
+    padding: 40px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+    display: block;
+    width: 260px;
+    margin: 0 auto 20px;
+    z-index: 1;
+}
+
+h2 {
+    color: #0F1035;
+    text-align: center;
+    margin-bottom: 30px;
+    font-weight: 900;
+}
+
+.input-group {
+    margin-bottom: 10px;
+}
+
+label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 5px;
+    color: #365486;
+    font-weight: 600;
+}
+
+label i {
+    margin-right: 8px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #365486;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+.login-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #0F1035;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    font-size: 18px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.login-btn:hover {
+    background-color: #365486;
+    transform: translateY(-3px);
+}
+
+.links {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.links a {
+    display: block;
+    color: #365486;
+    text-decoration: none;
+    margin-top: 10px;
+    font-weight: 500;
+    transition: color 0.3s ease;
+}
+
+.links a:hover {
+    color: #0F1035;
+}
+
+.barra-decorativa {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: auto; /* Ajusta este tamaño según tus necesidades */
+    height: 88%; /* Ajusta este tamaño según tus necesidades */
+    background-color: transparent;
+    z-index: 1;
+
+
+  
+}
+
+.footer-decorativa {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 1200px; 
+    height: 88%;
+    background-color: transparent;
+    
+}
