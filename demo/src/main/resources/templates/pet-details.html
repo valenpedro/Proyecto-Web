@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles de Mascota - Dogin</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/pet-details.css">
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+</head>
+<body>
+    <header id="header">
+        <div id="logo">
+            <img src="/images/logo.png" alt="Dogin Logo" />
+        </div>
+        <ul>
+            <li><a href="/">Inicio</a></li>
+            <li><a href="#servicios">Servicios</a></li>
+            <li><a href="#sobre">Sobre Nosotros</a></li>
+            <li><a href="#contacto">Contacto</a></li>
+            <li><a href="login.html" class="button">Iniciar Sesión</a></li>
+        </ul>
+    </header>
+    
+    <main>
+        <h1 class="servicios">Detalles de la Mascota</h1>
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title" th:text="${pet.name}"></h5>
+                    <p class="card-text">ID: <span th:text="${pet.id}"></span></p>
+                    <p class="card-text">Raza: <span th:text="${pet.breed}"></span></p>
+                    <p class="card-text">Edad: <span th:text="${pet.age}"></span></p>
+                    <p class="card-text">Peso: <span th:text="${pet.weight}"></span> kg</p>
+                    <p class="card-text">Enfermedad: <span th:text="${pet.illness}"></span></p>
+                    <p class="card-text">Estado: <span th:text="${pet.status}"></span></p>
+                    <img th:src="${pet.photoUrl}" alt="Foto de Mascota" class="card-img-top">
+                </div>
+                <!-- Botón para volver a la lista de mascotas -->
+                <a href="/pets" class="btn-testimonios">Volver</a>
+            </div>
+        </div>
+    </main>
+
+    <img src="/images/footer.png" alt="Footer Decorativo" class="footer-decorativa" />
+    
+    <script src="/JavaScript/script.js" defer></script>
+</body>
+</html>

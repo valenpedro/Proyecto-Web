@@ -1,0 +1,229 @@
+/* Reset de márgenes y padding */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilo básico del cuerpo */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #DCF2F1;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Barra de navegación */
+#header ul {
+    display: flex;
+    padding: 15px 30px;
+    gap: 15px;
+    justify-content: end;
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin-top: 30px;
+    margin-right: 20px;
+    background-color: #fbf3f3;
+    border-radius: 40px;
+    z-index: 1000;
+}
+
+#header ul li {
+    list-style: none;
+    font-size: 18px;
+    font-weight: 500;
+    color: #365486;
+}
+
+#header ul li a {
+    text-decoration: none;
+    color: #365486;
+    font-size: 23px;
+    font-weight: 600;
+    padding: 10px 15px;
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+#header ul li a:hover {
+    background-color: #0f1035;
+    color: #fbf3f3;
+}
+
+#header ul li a.button {
+    border: 1px solid #365486;
+    padding: 10px 20px;
+    border-radius: 40px;
+    background-color: #3654861c;
+    color: #365486;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+#header ul li a.button:hover {
+    background-color: #0f1035;
+    color: #fbf3f3;
+}
+
+#logo img {
+    width: 530px;
+    height: 300px;
+    margin-top: -50px;
+}
+
+/* Contenedor principal */
+main {
+    padding: 60px;
+    align-items: center;
+    justify-content: center;
+    z-index: 2;
+}
+
+h1.servicios {
+    font-size: 45px;
+    font-weight: 900;
+    color: #0f1035;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    text-align: center;
+    margin-bottom: 40px;
+	margin-top: -150px;
+}
+
+/* Contenedor de la tabla */
+.container {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+}
+
+/* Estilos de la tabla */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+thead th {
+    background-color: #365486;
+    color: #ffffff;
+    padding: 15px;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* Mejorar visualmente la tabla */
+tbody tr {
+    border-bottom: 1px solid #dddddd;
+    transition: background-color 0.3s ease;
+}
+
+tbody tr:hover {
+    background-color: #f7f7f7; /* Suavizar el color de fondo al hacer hover */
+}
+
+tbody td {
+    padding: 10px 10px; /* Ajusta el padding para reducir el espacio vertical */
+    text-align: center;
+    font-size: 16px;
+    color: #0f1035;
+}
+/* Limitar el ancho de la columna "Detalles" y centrar el botón */
+tbody td:last-child {
+    width: 100px; /* Limitar el ancho de la columna "Detalles" */
+}
+
+/* Estilo de las imágenes dentro de la tabla */
+.pet-photo {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+/* Estilo de los botones */
+.btn-testimonios {
+    text-decoration: none;
+    background-color: #0f1035;
+    color: #f0eded;
+    border-radius: 10px;
+    font-size: 14px;
+    padding: 8px 10px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    margin: 0 auto; /* Centrar el botón dentro de la celda */
+}
+
+.btn-testimonios:hover {
+    background-color: #365486;
+}
+
+/* Footer decorativo */
+.footer-decorativa {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: auto;
+    height: 80%;
+    z-index: -1;
+    background-color: transparent;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    h1.servicios {
+        font-size: 35px;
+        margin-bottom: 30px;
+    }
+
+    table, thead, tbody, th, td, tr {
+        display: block;
+    }
+
+    thead {
+        display: none;
+    }
+
+    tbody tr {
+        margin-bottom: 15px;
+    }
+
+    tbody td {
+        padding: 10px;
+        text-align: right;
+        position: relative;
+        padding-left: 50%;
+    }
+
+    tbody td:before {
+        content: attr(data-label);
+        position: absolute;
+        left: 10px;
+        width: 45%;
+        padding-left: 15px;
+        font-weight: 600;
+        font-size: 16px;
+        color: #365486;
+    }
+
+    .pet-photo {
+        width: 40px;
+        height: 40px;
+    }
+
+    .btn-testimonios {
+        padding: 8px 15px;
+        font-size: 16px;
+    }
+}
