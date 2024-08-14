@@ -56,17 +56,23 @@ h5 {
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
 }
 
-.card-title {
-    font-size: 35px;
-    font-weight: 900;
-    color: #365486;
-    margin-bottom: 30px;
+/* Estilos de la tarjeta - cuerpo */
+.card-body {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
 }
 
-.card-text {
-    font-size: 20px;
-    color: #0f1035;
-    margin-bottom: 20px;
+/* Estilos para los detalles de la mascota */
+.details {
+    flex: 1;
+    text-align: left;
+}
+
+/* Contenedor de la imagen */
+.image-container {
+    flex-shrink: 0;
+    margin-left: 20px; /* Espacio entre los detalles y la imagen */
 }
 
 /* Imagen de la mascota */
@@ -75,7 +81,6 @@ h5 {
     width: 250px;
     height: 250px;
     object-fit: cover;
-    margin-bottom: 30px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease;
 }
@@ -96,6 +101,7 @@ h5 {
     transition: background-color 0.3s ease, transform 0.3s ease;
     display: block;
     margin-top: 20px;
+    margin-bottom: -30px;
     margin-left: auto;
     margin-right: auto;
     max-width: 200px;
@@ -124,16 +130,12 @@ h5 {
         padding: 20px;
     }
 
-    .card {
-        padding: 20px;
+    .card-body {
+        flex-direction: column;
     }
 
-    .card-title {
-        font-size: 28px;
-    }
-
-    .card-text {
-        font-size: 16px;
+    .details {
+        margin-bottom: 20px;
     }
 
     .card-img-top {
