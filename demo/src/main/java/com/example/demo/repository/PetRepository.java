@@ -51,5 +51,30 @@ public class PetRepository {
     
         return pets;
     }
-    
+// Agregue save, delete by id y find index by id
+    public void save(Pet pet) {
+        if (pet.getId() == 0) {
+            pet.setId(pets.size() + 1); // Generar un nuevo ID
+            pets.add(pet);
+        } else {
+            int index = findIndexById(pet.getId());
+            if (index >= 0) {
+                pets.set(index, pet); // Actualizar el registro existente
+            }
+        }
+    }
+
+    public void deleteById(int id) {
+        pets.removeIf(pet -> pet.getId() == id);
+    }
+
+    private int findIndexById(int id) {
+        for (int i = 0; i < pets.size(); i++) {
+            if (pets.get(i).getId() == id) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
 }

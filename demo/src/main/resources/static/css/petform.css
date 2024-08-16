@@ -1,0 +1,127 @@
+/* Estilos globales */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #DCF2F1;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 0px;
+    margin-top: auto;
+
+}
+
+/* Contenedor principal */
+.container {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 100%;
+    max-width: 450px;
+    margin: 20px auto;
+    max-height: 80vh;
+}
+
+/* Título principal */
+h1.servicios {
+    font-size: 36px;
+    font-weight: 800;
+    color: #365486;
+    text-align: center;
+    margin-bottom: 30px;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+/* Estilos del formulario */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.form-group {
+    position: relative;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #365486;
+    font-weight: 600;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="url"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 16px;
+    transition: all 0.3s ease;
+}
+
+input:focus {
+    border-color: #365486;
+    box-shadow: 0 0 0 2px rgba(54, 84, 134, 0.2);
+    outline: none;
+}
+
+/* Botones */
+.button-group {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    position: right;
+}
+
+.btn-testimonios {
+    background-color: #365486;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    text-align: center;
+}
+
+.btn-testimonios:hover {
+    background-color: #0f1035;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+/* Animaciones */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.container {
+    animation: fadeIn 0.5s ease-out;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .container {
+        width: 95%;
+        padding: 20px;
+        margin: 10px auto;
+    }
+
+    h1.servicios {
+        font-size: 28px;
+    }
+
+    .btn-testimonios {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}
