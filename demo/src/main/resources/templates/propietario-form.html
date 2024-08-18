@@ -10,7 +10,7 @@
     <form th:action="@{${isEdit} ? '/propietarios/editar/' + ${propietario.cedula} : '/propietarios/nuevo'}" th:object="${propietario}" method="post">
         <label for="cedula">Cédula:</label>
         <input type="text" id="cedula" th:field="*{cedula}"/>
-        <label for="nombre">Nombre:</label>
+        <label for="nombre">Nombree:</label>
         <input type="text" id="nombre" th:field="*{nombre}" />
         <label for="correo">Correo:</label>
         <input type="text" id="correo" th:field="*{correo}" />
