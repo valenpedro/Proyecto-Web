@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+  <head>
+    <title>Lista de Propietarios</title>
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/propietario-list.css" />
+  </head>
+  <body>
+    <header id="header">
+      <div id="logo">
+        <img src="/images/logo.png" alt="Dogin Logo" />
+      </div>
+      <ul>
+        <li><a href="/">Inicio</a></li>
+        <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#sobre">Sobre Nosotros</a></li>
+        <li><a href="#contacto">Contacto</a></li>
+        <li><a href="/templates/login.html" class="button">Iniciar Sesión</a></li>
+      </ul>
+    </header>
+    <main>
+      <h1>Lista de Propietarios</h1>
+      <a th:href="@{/propietarios/nuevo}">Agregar Nuevo Propietario</a>
+      <table border="1">
+        <thead>
+          <tr>
+            <th>Cédula</th>
+            <th>Nombre</th>
+            <th>Correo</th>
+            <th>Celular</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr th:each="propietario : ${propietarios}">
+            <td th:text="${propietario.cedula}"></td>
+            <td th:text="${propietario.nombre}"></td>
+            <td th:text="${propietario.correo}"></td>
+            <td th:text="${propietario.celular}"></td>
+            <td>
+              <a
+                th:href="@{/propietarios/editar/{cedula}(cedula=${propietario.cedula})}"
+                >Editar</a
+              >
+              |
+              <a
+                th:href="@{/propietarios/eliminar/{cedula}(cedula=${propietario.cedula})}"
+                >Eliminar</a
+              >
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </main>
+    <img
+      src="/images/footer.png"
+      alt="Footer Decorativo"
+      class="footer-decorativa"
+    />
+
+    <script src="/JavaScript/script.js" defer></script>
+  </body>
+</html>

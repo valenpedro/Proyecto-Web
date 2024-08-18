@@ -1,0 +1,123 @@
+/* Estilos globales */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #DCF2F1;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+}
+
+/* Contenedor del formulario */
+.container {
+    max-width: 500px;
+    width: 100%;
+    padding: 30px;
+    background: linear-gradient(135deg, #fff, #f9f9f9);
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    text-align: center;
+}
+
+/* Título del formulario */
+h1 {
+    font-size: 35px;
+    font-weight: 900;
+    color: #0f1035;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    margin-bottom: 30px;
+}
+
+/* Estilos de los formularios */
+form {
+    text-align: left;
+    width: 100%;
+}
+
+form label {
+    display: block;
+    font-size: 18px;
+    font-weight: 600;
+    color: #0f1035;
+    margin-bottom: 5px;
+}
+
+form input[type="text"],
+form input[type="email"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    transition: border 0.3s ease;
+}
+
+form input[type="text"]:focus,
+form input[type="email"]:focus {
+    border-color: #365486;
+}
+
+/* Botón de enviar */
+form button[type="submit"] {
+    background-color: #0f1035;
+    color: #f0eded;
+    border-radius: 25px;
+    font-size: 18px;
+    padding: 10px 20px;
+    font-weight: 600;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    width: 100%;
+    margin-top: 20px;
+}
+
+form button[type="submit"]:hover {
+    background-color: #365486;
+    transform: translateY(-5px);
+}
+
+/* Botón de volver */
+a {
+    text-decoration: none;
+    display: block;
+    margin-top: 20px;
+    color: #0f1035;
+    font-weight: 600;
+    font-size: 16px;
+}
+
+a:hover {
+    color: #365486;
+    transform: translateY(-3px);
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .container {
+        max-width: 90%;
+        padding: 20px;
+    }
+
+    h1 {
+        font-size: 28px;
+    }
+
+    form input[type="text"],
+    form input[type="email"] {
+        font-size: 16px;
+    }
+
+    form button[type="submit"] {
+        font-size: 16px;
+        padding: 8px 15px;
+    }
+
+    a {
+        font-size: 14px;
+    }
+}
