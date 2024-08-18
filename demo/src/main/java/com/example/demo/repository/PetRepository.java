@@ -12,7 +12,7 @@ public class PetRepository {
     private List<Pet> pets;
 
     public PetRepository() {
-        this.pets = generateRandomPets(50); // Change 20 to any number of pets you want to create
+        this.pets = generateRandomPets(50); // Change 50 to any number of pets you want to create
     }
 
     public List<Pet> findAll() {
@@ -28,30 +28,53 @@ public class PetRepository {
         Random random = new Random();
         String[] names = {"Max", "Bella", "Charlie", "Lucy", "Milo", "Luna"};
         String[] breeds = {"Golden Retriever", "Bulldog", "Poodle", "Beagle", "Shih Tzu"};
-        String[] illnesses = {"Healthy", "Injured", "Sick", "Under Observation"};
-        String[] statuses = {"Active", "Inactive"};
+        String[] illnesses = {"Saludable", "Herido", "Enfermo", "En Observación"};
+        String[] statuses = {"Activo", "Inactivo"};
         String[] photoUrls = {
-                "http://example.com/max.jpg",
-                "http://example.com/bella.jpg",
-                "http://example.com/charlie.jpg",
-                "http://example.com/lucy.jpg",
-                "http://example.com/milo.jpg",
-                "http://example.com/luna.jpg"
+            "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*",
+            "https://www.hartz.com/wp-content/uploads/2022/04/small-dog-owners-1.jpg",
+            "https://static.vecteezy.com/system/resources/thumbnails/005/857/332/small_2x/funny-portrait-of-cute-corgi-dog-outdoors-free-photo.jpg"
         };
-
+    
         for (int i = 1; i <= count; i++) {
             pets.add(new Pet(
                     i,
                     names[random.nextInt(names.length)],
                     breeds[random.nextInt(breeds.length)],
-                    random.nextInt(15), // Age between 0 and 14
-                    random.nextFloat() * 30, // Weight between 0 and 30 kg
+                    random.nextInt(15), // Edad entre 0 y 14
+                    random.nextInt(31), // Peso entre 0 y 30 kg, ahora es un número entero
                     illnesses[random.nextInt(illnesses.length)],
-                    photoUrls[random.nextInt(photoUrls.length)],
+                    photoUrls[random.nextInt(photoUrls.length)], // Selección aleatoria de una de las URLs proporcionadas
                     statuses[random.nextInt(statuses.length)]
             ));
         }
-
+    
         return pets;
     }
+// Agregue save, delete by id y find index by id
+    public void save(Pet pet) {
+        if (pet.getId() == 0) {
+            pet.setId(pets.size() + 1); // Generar un nuevo ID
+            pets.add(pet);
+        } else {
+            int index = findIndexById(pet.getId());
+            if (index >= 0) {
+                pets.set(index, pet); // Actualizar el registro existente
+            }
+        }
+    }
+
+    public void deleteById(int id) {
+        pets.removeIf(pet -> pet.getId() == id);
+    }
+
+    private int findIndexById(int id) {
+        for (int i = 0; i < pets.size(); i++) {
+            if (pets.get(i).getId() == id) {
+                return i;
+            }
+        }
+        return -1;
+    }
+
 }

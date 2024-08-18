@@ -12,15 +12,16 @@ body {
 /* Ajustes del contenedor principal */
 .container {
     margin-top: -50px;
-    max-width: 60%;
+    max-width: 40%; /* Cambiado de 60% a 40% para hacerlo más estrecho */
     margin-left: auto;
     margin-right: auto;
-    padding: 30px;
+    padding: 20px; /* Reducido de 30px a 20px */
     background: linear-gradient(135deg, #fff, #f9f9f9);
     border-radius: 25px;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
     text-align: center;
 }
+
 
 /* Título principal */
 h1.servicios {
@@ -31,42 +32,69 @@ h1.servicios {
     margin-bottom: 40px;
     margin-top: -150px;
 }
+
 h5 {
-    font-size: 20px;
+    font-size: 35px;
     font-weight: 600;
     color: #0f1035;
-    margin-top: -20px;
+    margin-top: 20px;
     margin-bottom: -15px;
 }
 
+/* Título del nombre del perro */
+h5.card-title {
+    font-size: 45px; /* Incrementa el tamaño de la fuente aquí */
+    font-weight: 700;
+    color: #365486;
+    margin-top: 20px;
+    margin-bottom: -15px;
+}
+
+
 /* Estilos de la tarjeta */
 .card {
-    background-color: #ffffff;
-    margin-top: 0px;
+    background: linear-gradient(135deg, #f3f3f3, #ffffff);
+    margin-top: 20px;
     border-radius: 25px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-    padding: 40px;
+    padding: 20px; /* Reducido de 40px a 20px */
     position: relative;
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 0px; /* Asegúrate de que no haya margen inferior */
+    height: auto; /* Esto puede ayudar a reducir cualquier espacio adicional */
 }
+
 
 .card:hover {
     transform: translateY(-10px);
     box-shadow: 0 20px 45px rgba(0, 0, 0, 0.3);
 }
 
-.card-title {
-    font-size: 35px;
-    font-weight: 900;
-    color: #365486;
-    margin-bottom: 30px;
+/* Estilos de la tarjeta - cuerpo */
+.card-body {
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 0; /* Asegúrate de que no haya padding adicional */
+    margin: 0; /* Asegúrate de que no haya margen adicional */
 }
 
-.card-text {
-    font-size: 20px;
-    color: #0f1035;
-    margin-bottom: 20px;
+
+/* Estilos para los detalles de la mascota */
+.details {
+    margin-bottom: 0px;
+    padding: 0;
+}
+
+/* Contenedor de la imagen */
+.image-container {
+    flex-shrink: 0;
+    margin-left: 20px; /* Espacio entre los detalles y la imagen */
 }
 
 /* Imagen de la mascota */
@@ -75,9 +103,9 @@ h5 {
     width: 250px;
     height: 250px;
     object-fit: cover;
-    margin-bottom: 30px;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease;
+    border: 5px solid #f9f9f9;
 }
 
 .card-img-top:hover {
@@ -96,10 +124,13 @@ h5 {
     transition: background-color 0.3s ease, transform 0.3s ease;
     display: block;
     margin-top: 20px;
+    margin-bottom: 0px; /* Asegúrate de que no haya margen inferior */
     margin-left: auto;
     margin-right: auto;
     max-width: 200px;
 }
+
+
 
 .btn-testimonios:hover {
     background-color: #365486;
@@ -124,16 +155,12 @@ h5 {
         padding: 20px;
     }
 
-    .card {
-        padding: 20px;
+    .card-body {
+        flex-direction: column;
     }
 
-    .card-title {
-        font-size: 28px;
-    }
-
-    .card-text {
-        font-size: 16px;
+    .details {
+        margin-bottom: 20px;
     }
 
     .card-img-top {

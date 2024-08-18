@@ -22,4 +22,15 @@ public class PetService {
     public Pet getPetById(int id) {
         return petRepository.findById(id);
     }
+
+    //Agregue savepey y delete pet by id
+
+    public void savePet(Pet pet) {
+        petRepository.save(pet);
+    }
+
+    public void deletePetById(int id) {
+        petRepository.deleteById(id);
+    }
 }
+
