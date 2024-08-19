@@ -16,6 +16,8 @@
         <input type="text" id="correo" th:field="*{correo}" />
         <label for="celular">Celular:</label>
         <input type="text" id="celular" th:field="*{celular}" />
+        <label for="contrasena">Contraseña:</label>
+        <input type="text" id="contrasena" th:field="*{contrasena}" />
         <button type="submit" th:text="${isEdit} ? 'Actualizar' : 'Crear'">Enviar</button>
     </form>
     <a href="/propietarios">Volver a la lista</a>

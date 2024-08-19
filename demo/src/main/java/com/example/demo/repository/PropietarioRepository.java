@@ -15,8 +15,8 @@ public class PropietarioRepository {
 
     public PropietarioRepository() {
         propietarios = new ArrayList<>();
-        propietarios.add(new Propietario("123456789", "Natalia", "z5E7T@example.com", "1234567890"));    
-        propietarios.add(new Propietario("987654321", "Jane Smith", "z5E7T@example.com", "1234567890"));
+        propietarios.add(new Propietario("123456789", "Natalia", "z5E7T@example.com", "1234567890","123"));    
+        propietarios.add(new Propietario("987654321", "Jane Smith", "z5E7T@example.com", "1234567890","12345"));
     }
 
     public List<Propietario> findAll() {

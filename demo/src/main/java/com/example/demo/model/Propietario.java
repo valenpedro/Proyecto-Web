@@ -6,17 +6,27 @@ public class Propietario {
     private String nombre;
     private String correo;
     private String celular;
+    private String contrasena;
 
-    public Propietario(String cedula, String nombre, String correo, String celular) {
+    public Propietario(String cedula, String nombre, String correo, String celular, String contrasena) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.correo = correo;
         this.celular = celular;
+        this.contrasena = contrasena;
     }
 
     public Propietario() {
     }
 
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
+    }
+    
     public String getCedula() {
         return cedula;
     }

@@ -57,6 +57,7 @@ public class PropietarioController {
             updatedPropietario.setNombre(propietarioDetails.getNombre());
             updatedPropietario.setCorreo(propietarioDetails.getCorreo());
             updatedPropietario.setCelular(propietarioDetails.getCelular());
+            updatedPropietario.setContrasena(propietarioDetails.getContrasena());
             propietarioService.save(updatedPropietario);
         }
         return "redirect:/propietarios";

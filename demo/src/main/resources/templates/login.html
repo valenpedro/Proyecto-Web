@@ -4,12 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión - Dogin</title>
-<<<<<<< HEAD
     <link rel="stylesheet" href="/css/login.css" />
-=======
-    <!-- Ruta corregida para CSS -->
-    <link rel="stylesheet" href="/css/login.css">
->>>>>>> da84500fcef91e801f42ef26e92fb1cf523beac7
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap"
       rel="stylesheet"
@@ -31,46 +26,30 @@
       class="footer-decorativa"
     />
     <div class="container">
-<<<<<<< HEAD
-      <div class="login-box">
-        <img src="/images/logo.png" alt="Dogin Logo" class="logo" />
-        <h2>Iniciar Sesión</h2>
-        <form>
-          <div class="input-group">
-            <label for="email"
-              ><i class="fas fa-envelope"></i> Correo Electrónico</label
-            >
-            <input type="email" id="email" name="email" required />
-          </div>
-          <div class="input-group">
-            <label for="password"><i class="fas fa-lock"></i> Contraseña</label>
-            <input type="password" id="password" name="password" required />
-          </div>
-          <button type="submit" class="login-btn">Iniciar Sesión</button>
-        </form>
-        <div class="links">
-          <a href="#">¿Olvidaste tu contraseña?</a>
-          <a href="#">Crear una cuenta</a>
-=======
         <div class="login-box">
             <img src="/images/logo.png" alt="Dogin Logo" class="logo" />
             <h2>Iniciar Sesión</h2>
-            <form>
+            <form action="/login" method="post">
                 <div class="input-group">
                     <label for="email"><i class="fas fa-envelope"></i> Correo Electrónico</label>
                     <input type="email" id="email" name="email" required />
                 </div>
                 <div class="input-group">
                     <label for="password"><i class="fas fa-lock"></i> Contraseña</label>
-                    <input type="password" id="password" name="password" required />
+                    <input type="password" id="password" name="contrasena" required />
                 </div>
+
+                <!-- Mostrar mensaje de error -->
+                <div style="color: red; text-align: center; margin-top: 10px;">
+                    <p th:text="${error}"></p>
+                </div>
+
                 <button type="submit" class="login-btn">Iniciar Sesión</button>
             </form>
             <div class="links">
                 <a href="#">¿Olvidaste tu contraseña?</a>
                 <a href="#">Crear una cuenta</a>
             </div>
->>>>>>> da84500fcef91e801f42ef26e92fb1cf523beac7
         </div>
     </div>
 </body>
