@@ -1,6 +1,7 @@
 package com.example.demo.model;
 
 public class Pet {
+
     private int id;
     private String name;
     private String breed;
@@ -9,9 +10,10 @@ public class Pet {
     private String illness;
     private String photoUrl;
     private String status;
+    private String ownerId; // Guardar solo el ID del propietario
 
     // Constructor con todos los campos
-    public Pet(int id, String name, String breed, int age, float weight, String illness, String photoUrl, String status) {
+    public Pet(int id, String name, String breed, int age, float weight, String illness, String photoUrl, String status, String ownerId) {
         this.id = id;
         this.name = name;
         this.breed = breed;
@@ -20,6 +22,7 @@ public class Pet {
         this.illness = illness;
         this.photoUrl = photoUrl;
         this.status = status;
+        this.ownerId = ownerId;
     }
 
     // Constructor vacío
@@ -88,5 +91,13 @@ public class Pet {
 
     public void setStatus(String status) {
         this.status = status;
+    }
+
+    public String getOwnerId() {
+        return ownerId;
+    }
+
+    public void setOwnerId(String ownerId) {
+        this.ownerId = ownerId;
     }
 }

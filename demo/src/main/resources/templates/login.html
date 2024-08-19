@@ -30,22 +30,20 @@
             <img src="/images/logo.png" alt="Dogin Logo" class="logo" />
             <h2>Iniciar Sesión</h2>
             <form action="/login" method="post">
-                <div class="input-group">
-                    <label for="email"><i class="fas fa-envelope"></i> Correo Electrónico</label>
-                    <input type="email" id="email" name="email" required />
-                </div>
-                <div class="input-group">
-                    <label for="password"><i class="fas fa-lock"></i> Contraseña</label>
-                    <input type="password" id="password" name="contrasena" required />
-                </div>
-
-                <!-- Mostrar mensaje de error -->
-                <div style="color: red; text-align: center; margin-top: 10px;">
-                    <p th:text="${error}"></p>
-                </div>
-
-                <button type="submit" class="login-btn">Iniciar Sesión</button>
-            </form>
+				<div class="input-group">
+					<label for="email"><i class="fas fa-envelope"></i> Correo Electrónico</label>
+					<input type="email" id="email" name="email" required />
+				</div>
+				<div class="input-group">
+					<label for="password"><i class="fas fa-lock"></i> Contraseña</label>
+					<input type="password" id="password" name="contrasena" required />
+				</div>
+			
+				<!-- Mostrar mensaje de error -->
+				<div class="alert alert-danger" th:if="${error}" th:text="${error}"></div>
+			
+				<button type="submit" class="login-btn">Iniciar Sesión</button>
+			</form>			
             <div class="links">
                 <a href="#">¿Olvidaste tu contraseña?</a>
                 <a href="#">Crear una cuenta</a>

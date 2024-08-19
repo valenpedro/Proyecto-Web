@@ -36,6 +36,7 @@
                         <th>Nombre</th>
                         <th>Raza</th>
                         <th>Edad</th>
+                        <th>Propietario ID</th>
                         <th>Foto</th>
                         <th>Estado</th>
                         <th>Detalles</th>
@@ -47,6 +48,7 @@
                         <td th:text="${pet.name}"></td>
                         <td th:text="${pet.breed}"></td>
                         <td th:text="${pet.age}"></td>
+                        <td th:text="${pet.ownerId}"></td>
                         <td><img th:src="${pet.photoUrl}" alt="Foto de Mascota" class="pet-photo"></td>
                         <td th:text="${pet.status}"></td>
                         <td><a th:href="@{/pets/{id}(id=${pet.id})}" class="btn-testimonios">Ver Detalles</a></td>

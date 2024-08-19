@@ -4,53 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Formulario de Mascota</title>
-    <link rel="stylesheet" href="/css/index.css">
     <link rel="stylesheet" href="/css/petform.css">
-
-
 </head>
 <body>
     <header id="header">
-        <h1 class="servicios">Formulario de Mascota</h1>
+        <h1 class="form-title">Formulario de Mascota</h1>
     </header>
-    <main class="container">
-        <form action="#" th:action="@{/pets}" th:object="${pet}" method="post">
-            <input type="hidden" th:field="*{id}" />
-            <div class="form-group">
-                <label for="name">Nombre:</label>
-                <input type="text" id="name" th:field="*{name}" required>
-            </div>
-            <div class="form-group">
-                <label for="breed">Raza:</label>
-                <input type="text" id="breed" th:field="*{breed}" required>
-            </div>
-            <div class="form-group">
-                <label for="age">Edad:</label>
-                <input type="number" id="age" th:field="*{age}" required>
-            </div>
-            <div class="form-group">
-                <label for="weight">Peso:</label>
-                <input type="number" id="weight" th:field="*{weight}" required>
-            </div>
-            <div class="form-group">
-                <label for="illness">Enfermedad:</label>
-                <input type="text" id="illness" th:field="*{illness}">
-            </div>
-            <div class="form-group">
-                <label for="status">Estado:</label>
-                <input type="text" id="status" th:field="*{status}">
-            </div>
-            <div class="form-group">
-                <label for="photoUrl">URL de la foto:</label>
-                <input type="url" id="photoUrl" th:field="*{photoUrl}">
-            </div>
-
-            <div class="button-group">
-                <button type="submit" class="btn-testimonios">Guardar</button>
-                <a href="/pets" class="btn-testimonios">Cancelar</a>
-            </div>
-        </form>
-        
+    <main class="main-container">
+        <div class="form-container">
+            <form action="#" th:action="@{/pets}" th:object="${pet}" method="post">
+				<label for="name">Name:</label>
+				<input type="text" id="name" th:field="*{name}" />
+			
+				<label for="breed">Breed:</label>
+				<input type="text" id="breed" th:field="*{breed}" />
+			
+				<label for="age">Age:</label>
+				<input type="number" id="age" th:field="*{age}" />
+			
+				<label for="weight">Weight:</label>
+				<input type="number" id="weight" th:field="*{weight}" />
+			
+				<label for="illness">Illness:</label>
+				<input type="text" id="illness" th:field="*{illness}" />
+			
+				<label for="photoUrl">Photo URL:</label>
+				<input type="text" id="photoUrl" th:field="*{photoUrl}" />
+			
+				<label for="status">Status:</label>
+				<input type="text" id="status" th:field="*{status}" />
+			
+				<label for="owner">Owner:</label>
+				<select id="owner" th:field="*{ownerId}">
+					<option th:each="propietario : ${propietarios}" th:value="${propietario.cedula}" th:text="${propietario.nombre}"></option>
+				</select>
+			
+				<button type="submit">Save</button>
+			</form>			
+        </div>
     </main>
 </body>
 </html>

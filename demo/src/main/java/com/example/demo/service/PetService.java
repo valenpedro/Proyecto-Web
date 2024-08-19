@@ -23,8 +23,6 @@ public class PetService {
         return petRepository.findById(id);
     }
 
-    //Agregue savepey y delete pet by id
-
     public void savePet(Pet pet) {
         petRepository.save(pet);
     }
@@ -33,4 +31,3 @@ public class PetService {
         petRepository.deleteById(id);
     }
 }
-

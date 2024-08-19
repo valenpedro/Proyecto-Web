@@ -123,3 +123,12 @@ input {
     background-color: transparent;
     
 }
+
+.alert-danger {
+    background-color: #ffcccc;
+    color: #cc0000;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    margin-top: 15px;
+}

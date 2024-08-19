@@ -9,7 +9,6 @@ import org.springframework.stereotype.Service;
 import com.example.demo.model.Propietario;
 import com.example.demo.repository.PropietarioRepository;
 
-
 @Service
 public class PropietarioService {
 

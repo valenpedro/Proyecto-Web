@@ -1,0 +1,93 @@
+/* Estilos globales */
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: #DCF2F1;
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    position: relative; /* Asegura que el footer se posicione correctamente */
+}
+
+/* Contenedor principal */
+.error-container {
+    text-align: center;
+    background-color: white;
+    border-radius: 20px;
+    padding: 30px;
+    max-width: 600px;
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+    z-index: 2; /* Asegura que el contenido esté sobre el footer */
+}
+
+/* Título de error */
+.error-title {
+    font-size: 32px;
+    font-weight: 800;
+    color: #365486;
+    margin-bottom: 20px;
+}
+
+/* Mensaje de error */
+.error-message {
+    font-size: 18px;
+    color: #555;
+    margin-bottom: 30px;
+}
+
+/* Botón de regreso al inicio */
+.btn-home {
+    display: inline-block;
+    background-color: #365486;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    text-decoration: none;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+}
+
+.btn-home:hover {
+    background-color: #0f1035;
+}
+
+/* Footer decorativo */
+.footer-decorativa {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%; /* Asegura que el footer ocupe el ancho completo */
+    height: auto;
+    background-color: transparent;
+    z-index: 1; /* Footer detrás del contenido */
+}
+
+/* Logo */
+.logo {
+    max-width: 200px;
+    margin-bottom: 20px;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .error-container {
+        width: 90%;
+        padding: 20px;
+    }
+
+    .error-title {
+        font-size: 28px;
+    }
+
+    .error-message {
+        font-size: 16px;
+    }
+
+    .btn-home {
+        font-size: 14px;
+        padding: 8px 16px;
+    }
+}

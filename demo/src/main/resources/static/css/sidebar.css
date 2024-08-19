@@ -10,7 +10,7 @@
   font-family: "Inter", sans-serif;
 }
 
-body{
+body {
     background-color: #DCF2F1;
 }
 
@@ -18,8 +18,8 @@ body{
     position: absolute;
     top: 0;
     right: 0;
-    width: auto; /* Ajusta este tamaño según tus necesidades */
-    height: 88%; /* Ajusta este tamaño según tus necesidades */
+    width: auto;
+    height: 88%;
     background-color: transparent;
     z-index: 1;
 }
@@ -28,8 +28,8 @@ body{
     position: absolute;
     bottom: 0;
     left: 0;
-    width: auto; /* Ajusta este tamaño aquí tus necesidades */
-    height: 88%; /* Ajusta este tamaño aquí tus necesidades */
+    width: auto;
+    height: 88%;
     background-color: transparent;
     z-index: 1;
 }
@@ -45,14 +45,13 @@ body{
   transition: all 0.5s ease;
 }
 
-.logo-img{
+.logo-img {
   width: 70px;
   height: 70px;
   margin-left: 5px;
 }
 
-
-.logo-name{
+.logo-name {
     width: 130px;
     height: 80px;
     margin-left: 10px;
@@ -320,6 +319,15 @@ body{
   font-weight: 600;
 }
 
+/* Estilos para manejar la visibilidad de las secciones */
+.content-section {
+    display: none;
+}
+
+.content-section.active {
+    display: block;
+}
+
 @media (max-width: 400px) {
   .sidebar.close .nav-list li .sub-menu {
     display: none;
@@ -343,4 +351,74 @@ body{
     width: 100%;
     left: 0;
   }
+}
+
+/* Estilo de la tabla */
+.container {
+    max-width: 90%;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 30px;
+}
+
+thead th {
+    background-color: #365486;
+    color: #ffffff;
+    padding: 15px;
+    font-size: 16px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+tbody tr {
+    border-bottom: 1px solid #dddddd;
+    transition: background-color 0.3s ease;
+}
+
+tbody tr:hover {
+    background-color: #f7f7f7;
+}
+
+tbody td {
+    padding: 10px 10px;
+    text-align: center;
+    font-size: 16px;
+    color: #0f1035;
+}
+
+tbody td:last-child {
+    width: 100px;
+}
+
+.pet-photo {
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+    object-fit: cover;
+}
+
+.btn-testimonios {
+    text-decoration: none;
+    background-color: #0f1035;
+    color: #f0eded;
+    border-radius: 10px;
+    font-size: 14px;
+    padding: 8px 10px;
+    font-weight: 600;
+    transition: background-color 0.3s ease;
+    display: inline-block;
+    margin: 0 auto;
+}
+
+.btn-testimonios:hover {
+    background-color: #365486;
 }
