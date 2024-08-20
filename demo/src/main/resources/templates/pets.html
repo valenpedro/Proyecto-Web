@@ -28,6 +28,11 @@
     
     <main>
         <h1 class="servicios">Todas las Mascotas</h1>
+        <!-- Botón para crear una nueva mascota -->
+        <div class="button-container">
+            <a href="/pets/new" class="btn-testimonios">Crear Nueva Mascota</a>
+        </div>
+
         <div class="container">
             <table>
                 <thead>
@@ -39,7 +44,7 @@
                         <th>Propietario ID</th>
                         <th>Foto</th>
                         <th>Estado</th>
-                        <th>Detalles</th>
+                        <th>Acciones</th> <!-- Cambié "Detalles" a "Acciones" -->
                     </tr>
                 </thead>
                 <tbody>
@@ -51,7 +56,12 @@
                         <td th:text="${pet.ownerId}"></td>
                         <td><img th:src="${pet.photoUrl}" alt="Foto de Mascota" class="pet-photo"></td>
                         <td th:text="${pet.status}"></td>
-                        <td><a th:href="@{/pets/{id}(id=${pet.id})}" class="btn-testimonios">Ver Detalles</a></td>
+                        <td>
+                            <a th:href="@{/pets/{id}(id=${pet.id})}" class="btn-testimonios">Ver Detalles</a>
+                            <a th:href="@{/pets/edit/{id}(id=${pet.id})}" class="btn-testimonios">Editar</a>
+                            <a th:href="@{/pets/delete/{id}(id=${pet.id})}" class="btn-testimonios" 
+                               onclick="return confirm('¿Estás seguro de que deseas eliminar esta mascota?');">Eliminar</a>
+                        </td>
                     </tr>
                 </tbody>
             </table>

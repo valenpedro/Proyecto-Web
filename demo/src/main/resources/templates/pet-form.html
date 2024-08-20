@@ -12,35 +12,41 @@
     </header>
     <main class="main-container">
         <div class="form-container">
-            <form action="#" th:action="@{/pets}" th:object="${pet}" method="post">
-				<label for="name">Name:</label>
-				<input type="text" id="name" th:field="*{name}" />
-			
-				<label for="breed">Breed:</label>
-				<input type="text" id="breed" th:field="*{breed}" />
-			
-				<label for="age">Age:</label>
-				<input type="number" id="age" th:field="*{age}" />
-			
-				<label for="weight">Weight:</label>
-				<input type="number" id="weight" th:field="*{weight}" />
-			
-				<label for="illness">Illness:</label>
-				<input type="text" id="illness" th:field="*{illness}" />
-			
-				<label for="photoUrl">Photo URL:</label>
-				<input type="text" id="photoUrl" th:field="*{photoUrl}" />
-			
-				<label for="status">Status:</label>
-				<input type="text" id="status" th:field="*{status}" />
-			
-				<label for="owner">Owner:</label>
-				<select id="owner" th:field="*{ownerId}">
-					<option th:each="propietario : ${propietarios}" th:value="${propietario.cedula}" th:text="${propietario.nombre}"></option>
-				</select>
-			
-				<button type="submit">Save</button>
-			</form>			
+            <form th:action="@{/pets}" th:object="${pet}" method="post">
+                <!-- Campo oculto para mantener el ID de la mascota -->
+                <input type="hidden" th:field="*{id}" />
+
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" th:field="*{name}" />
+
+                <label for="breed">Raza:</label>
+                <input type="text" id="breed" th:field="*{breed}" />
+
+                <label for="age">Edad:</label>
+                <input type="number" id="age" th:field="*{age}" />
+
+                <label for="weight">Peso:</label>
+                <input type="number" id="weight" th:field="*{weight}" />
+
+                <label for="illness">Enfermedad:</label>
+                <input type="text" id="illness" th:field="*{illness}" />
+
+                <label for="photoUrl">URL de la Foto:</label>
+                <input type="text" id="photoUrl" th:field="*{photoUrl}" />
+
+                <label for="status">Estado:</label>
+                <select id="status" th:field="*{status}">
+                    <option value="Activo" th:text="'Activo'" th:selected="${pet.status == 'Activo'}">Activo</option>
+                    <option value="Inactivo" th:text="'Inactivo'" th:selected="${pet.status == 'Inactivo'}">Inactivo</option>
+                </select>
+
+                <label for="owner">Propietario:</label>
+                <select id="owner" th:field="*{ownerId}">
+                    <option th:each="propietario : ${propietarios}" th:value="${propietario.cedula}" th:text="${propietario.nombre}"></option>
+                </select>
+
+                <button type="submit">Guardar</button>
+            </form>          
         </div>
     </main>
 </body>

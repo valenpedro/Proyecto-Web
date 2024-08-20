@@ -53,19 +53,27 @@ public class LoginController {
 
 	@GetMapping("/panel_propietario")
 	public String panelPropietario(Model model, HttpSession session) {
+		// Obtener el propietario autenticado desde la sesión
 		Propietario propietario = (Propietario) session.getAttribute("usuarioLogueado");
+		
+		// Si no hay propietario en la sesión, redirigir a la página de login
 		if (propietario == null) {
-			return "redirect:/login"; // Si no hay usuario logueado, redirigir a login
+			return "redirect:/login";
 		}
 
-		String primerNombre = propietario.getNombre().split(" ")[0]; // Extraer el primer nombre
+		// Extraer el primer nombre del propietario
+		String primerNombre = propietario.getNombre().split(" ")[0];
 		model.addAttribute("primerNombre", primerNombre); // Agregar el primer nombre al modelo
 		
-		List<Pet> mascotas = propietario.getMascotas(); // Obtenemos la lista de mascotas del propietario
+		// Obtener la lista de mascotas del propietario autenticado
+		List<Pet> mascotas = propietario.getMascotas();
 		model.addAttribute("mascotas", mascotas); // Pasar la lista de mascotas al modelo
 		
-		return "panel_propietario"; // Devolver la vista panel_propietario
+		// Devolver la vista del panel del propietario
+		return "panel_propietario";
 	}
+
+
 
     @GetMapping("/logout")
     public String logout(HttpSession session) {

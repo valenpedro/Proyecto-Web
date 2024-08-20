@@ -4,96 +4,92 @@ import com.example.demo.model.Pet;
 import com.example.demo.model.Propietario;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
+import java.util.*;
 
 @Repository
 public class PetRepository {
-    private List<Pet> pets;
+    private Map<Integer, Pet> petMap = new HashMap<>();  // Usar un HashMap para almacenar las mascotas
 
     private final PropietarioRepository propietarioRepository;
 
     public PetRepository(PropietarioRepository propietarioRepository) {
         this.propietarioRepository = propietarioRepository;
+
         List<Propietario> propietarios = propietarioRepository.findAll();
         if (propietarios.isEmpty()) {
             throw new IllegalArgumentException("La lista de propietarios no puede estar vacía");
         }
-        this.pets = generateRandomPets(50, propietarios);
+
+        // Generar mascotas aleatorias y almacenarlas en el HashMap
+        generateRandomPets(50, propietarios);
     }
 
     public List<Pet> findAll() {
-        return pets;
+        return new ArrayList<>(petMap.values());  // Convertir el HashMap en una lista
     }
 
     public Pet findById(int id) {
-        return pets.stream().filter(pet -> pet.getId() == id).findFirst().orElse(null);
-    }
-
-    public List<Pet> findByOwnerId(String ownerId) {
-        return pets.stream().filter(pet -> pet.getOwnerId().equals(ownerId)).toList();
+        return petMap.get(id);  // Obtener la mascota por su ID
     }
 
     public void save(Pet pet) {
-        // Verificar si la mascota ya existe (editar)
-        int index = findIndexById(pet.getId());
-        if (index == -1) {
-            // Nueva mascota
-            pet.setId(pets.size() + 1);
-            pets.add(pet);
-            // Agregar la mascota a la lista del propietario
-            Propietario propietario = propietarioRepository.findById(pet.getOwnerId()).orElse(null);
-            if (propietario != null) {
+        if (pet.getId() == 0) {
+            // Nueva mascota - Genera un nuevo ID solo si es un nuevo pet (ID es 0)
+            pet.setId(generateNewId());
+        }
+    
+        // Guardar o actualizar la mascota en el HashMap
+        petMap.put(pet.getId(), pet);
+        
+        // Manejo de propietarios (verificar si ha cambiado el propietario, etc.)
+        Propietario propietario = propietarioRepository.findById(pet.getOwnerId()).orElse(null);
+        if (propietario != null) {
+            // Verificar si la mascota pertenece a un nuevo propietario
+            if (!propietario.getMascotas().contains(pet)) {
+                // Quitar la mascota de la lista del propietario anterior si ha cambiado
+                petMap.values().stream()
+                    .filter(existingPet -> existingPet.getId() == pet.getId())
+                    .findFirst()
+                    .ifPresent(existingPet -> {
+                        Propietario oldOwner = propietarioRepository.findById(existingPet.getOwnerId()).orElse(null);
+                        if (oldOwner != null && !oldOwner.getCedula().equals(propietario.getCedula())) {
+                            oldOwner.getMascotas().remove(existingPet);
+                            propietarioRepository.save(oldOwner);
+                        }
+                    });
+    
+                // Agregar la mascota a la lista del nuevo propietario
                 propietario.addPet(pet);
                 propietarioRepository.save(propietario);
             }
-        } else {
-            // Mascota existente, verificar si hay cambio de propietario
-            Pet existingPet = pets.get(index);
-            if (!existingPet.getOwnerId().equals(pet.getOwnerId())) {
-                // Quitar la mascota de la lista del propietario anterior
-                Propietario oldOwner = propietarioRepository.findById(existingPet.getOwnerId()).orElse(null);
-                if (oldOwner != null) {
-                    oldOwner.getMascotas().remove(existingPet);
-                    propietarioRepository.save(oldOwner);
-                }
-                // Agregar la mascota a la lista del nuevo propietario
-                Propietario newOwner = propietarioRepository.findById(pet.getOwnerId()).orElse(null);
-                if (newOwner != null) {
-                    newOwner.addPet(pet);
-                    propietarioRepository.save(newOwner);
-                }
-            }
-            // Actualizar la información de la mascota
-            pets.set(index, pet);
         }
-    }
+    }    
 
     public void deleteById(int id) {
         Pet pet = findById(id);
         if (pet != null) {
+            // Eliminar la mascota del HashMap
+            petMap.remove(id);
+
             // Eliminar la mascota de la lista del propietario
             Propietario propietario = propietarioRepository.findById(pet.getOwnerId()).orElse(null);
             if (propietario != null) {
                 propietario.getMascotas().remove(pet);
                 propietarioRepository.save(propietario);
             }
-            pets.remove(pet);
         }
     }
 
-    private int findIndexById(int id) {
-        for (int i = 0; i < pets.size(); i++) {
-            if (pets.get(i).getId() == id) {
-                return i;
-            }
+    private int generateNewId() {
+        if (petMap.isEmpty()) {
+            return 1;  // Si el mapa está vacío, el primer ID será 1
+        } else {
+            return Collections.max(petMap.keySet()) + 1;  // Generar un nuevo ID basado en el mayor ID existente
         }
-        return -1;
     }
+    
 
-    private List<Pet> generateRandomPets(int count, List<Propietario> propietarios) {
-        List<Pet> pets = new ArrayList<>();
+    private void generateRandomPets(int count, List<Propietario> propietarios) {
         Random random = new Random();
         String[] names = {"Max", "Bella", "Charlie", "Lucy", "Milo", "Luna"};
         String[] breeds = {"Golden Retriever", "Bulldog", "Poodle", "Beagle", "Shih Tzu"};
@@ -108,20 +104,18 @@ public class PetRepository {
         for (int i = 1; i <= count; i++) {
             Propietario randomOwner = propietarios.get(random.nextInt(propietarios.size()));
             Pet pet = new Pet(
-                    i,
-                    names[random.nextInt(names.length)],
-                    breeds[random.nextInt(breeds.length)],
-                    random.nextInt(15), // Edad entre 0 y 14
-                    random.nextInt(31), // Peso entre 0 y 30 kg
-                    illnesses[random.nextInt(illnesses.length)],
-                    photoUrls[random.nextInt(photoUrls.length)],
-                    statuses[random.nextInt(statuses.length)],
-                    randomOwner.getCedula() // Guardamos solo el ID del propietario
+                generateNewId(),
+                names[random.nextInt(names.length)],
+                breeds[random.nextInt(breeds.length)],
+                random.nextInt(15), // Edad entre 0 y 14
+                random.nextInt(31), // Peso entre 0 y 30 kg
+                illnesses[random.nextInt(illnesses.length)],
+                photoUrls[random.nextInt(photoUrls.length)],
+                statuses[random.nextInt(statuses.length)],
+                randomOwner.getCedula() // Guardamos solo el ID del propietario
             );
-            pets.add(pet);
+            petMap.put(pet.getId(), pet);  // Agregar la mascota al HashMap
             randomOwner.addPet(pet); // Agregar la mascota al propietario
         }
-
-        return pets;
     }
 }

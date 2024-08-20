@@ -6,20 +6,27 @@
     <link rel="stylesheet" href="/css/propietario-form.css">
 </head>
 <body>
-    <h1 th:text="${isEdit} ? 'Editar Propietario' : 'Nuevo Propietario'">Formulario de Propietario</h1>
-    <form th:action="@{${isEdit} ? '/propietarios/editar/' + ${propietario.cedula} : '/propietarios/nuevo'}" th:object="${propietario}" method="post">
-        <label for="cedula">Cédula:</label>
-        <input type="text" id="cedula" th:field="*{cedula}"/>
-        <label for="nombre">Nombree:</label>
-        <input type="text" id="nombre" th:field="*{nombre}" />
-        <label for="correo">Correo:</label>
-        <input type="text" id="correo" th:field="*{correo}" />
-        <label for="celular">Celular:</label>
-        <input type="text" id="celular" th:field="*{celular}" />
-        <label for="contrasena">Contraseña:</label>
-        <input type="text" id="contrasena" th:field="*{contrasena}" />
-        <button type="submit" th:text="${isEdit} ? 'Actualizar' : 'Crear'">Enviar</button>
-    </form>
-    <a href="/propietarios">Volver a la lista</a>
+    <div class="container">
+        <h1 th:text="${isEdit} ? 'Editar Propietario' : 'Nuevo Propietario'">Formulario de Propietario</h1>
+        <form th:action="@{${isEdit} ? '/propietarios/editar/' + ${propietario.cedula} : '/propietarios/nuevo'}" th:object="${propietario}" method="post">
+            <label for="cedula">Cédula:</label>
+            <input type="text" id="cedula" th:field="*{cedula}" />
+
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" th:field="*{nombre}" />
+
+            <label for="correo">Correo:</label>
+            <input type="text" id="correo" th:field="*{correo}" />
+
+            <label for="celular">Celular:</label>
+            <input type="text" id="celular" th:field="*{celular}" />
+
+            <label for="contrasena">Contraseña:</label>
+            <input type="text" id="contrasena" th:field="*{contrasena}" />
+
+            <button type="submit" th:text="${isEdit} ? 'Actualizar' : 'Crear'">Enviar</button>
+        </form>
+        <a href="/propietarios">Volver a la lista</a>
+    </div>
 </body>
 </html>
