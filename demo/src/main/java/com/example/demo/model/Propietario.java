@@ -1,16 +1,21 @@
 package com.example.demo.model;
 
+import jakarta.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
 public class Propietario {
 
+    @Id
     private String cedula;
     private String nombre;
     private String correo;
     private String celular;
     private String contrasena;
-    private List<Pet> mascotas;
+
+    @OneToMany(mappedBy = "propietario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
+	private List<Pet> mascotas = new ArrayList<>();
 
     // Constructor con todos los campos
     public Propietario(String cedula, String nombre, String correo, String celular, String contrasena) {
@@ -19,13 +24,10 @@ public class Propietario {
         this.correo = correo;
         this.celular = celular;
         this.contrasena = contrasena;
-        this.mascotas = new ArrayList<>();
     }
 
     // Constructor vacío
-    public Propietario() {
-        this.mascotas = new ArrayList<>();
-    }
+    public Propietario() {}
 
     // Getters y Setters
     public String getCedula() {
@@ -77,6 +79,12 @@ public class Propietario {
     }
 
     public void addPet(Pet pet) {
-        this.mascotas.add(pet);
+        mascotas.add(pet);
+        pet.setPropietario(this);
+    }
+
+    public void removePet(Pet pet) {
+        mascotas.remove(pet);
+        pet.setPropietario(null);
     }
 }

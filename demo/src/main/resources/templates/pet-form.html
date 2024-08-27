@@ -41,9 +41,10 @@
                 </select>
 
                 <label for="owner">Propietario:</label>
-                <select id="owner" th:field="*{ownerId}">
-                    <option th:each="propietario : ${propietarios}" th:value="${propietario.cedula}" th:text="${propietario.nombre}"></option>
-                </select>
+				<label for="owner">Propietario:</label>
+				<select id="owner" th:field="*{propietario}">
+					<option th:each="propietario : ${propietarios}" th:value="${propietario.cedula}" th:text="${propietario.nombre}"></option>
+				</select>
 
                 <button type="submit">Guardar</button>
             </form>          

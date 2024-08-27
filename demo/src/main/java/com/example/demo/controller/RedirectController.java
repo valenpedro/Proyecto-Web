@@ -29,4 +29,5 @@ public class RedirectController {
     public String redirectPets() {
         return "redirect:/pets";
     }
+	
 }

@@ -1,7 +1,12 @@
 package com.example.demo.model;
 
+import jakarta.persistence.*;
+
+@Entity
 public class Pet {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String name;
     private String breed;
@@ -10,11 +15,13 @@ public class Pet {
     private String illness;
     private String photoUrl;
     private String status;
-    private String ownerId; // Guardar solo el ID del propietario
+
+    @ManyToOne
+    @JoinColumn(name = "propietario_cedula", nullable = false)
+    private Propietario propietario; // Referencia al propietario
 
     // Constructor con todos los campos
-    public Pet(int id, String name, String breed, int age, float weight, String illness, String photoUrl, String status, String ownerId) {
-        this.id = id;
+    public Pet(String name, String breed, int age, float weight, String illness, String photoUrl, String status, Propietario propietario) {
         this.name = name;
         this.breed = breed;
         this.age = age;
@@ -22,7 +29,7 @@ public class Pet {
         this.illness = illness;
         this.photoUrl = photoUrl;
         this.status = status;
-        this.ownerId = ownerId;
+        this.propietario = propietario;
     }
 
     // Constructor vacío
@@ -93,11 +100,11 @@ public class Pet {
         this.status = status;
     }
 
-    public String getOwnerId() {
-        return ownerId;
+    public Propietario getPropietario() {
+        return propietario;
     }
 
-    public void setOwnerId(String ownerId) {
-        this.ownerId = ownerId;
+    public void setPropietario(Propietario propietario) {
+        this.propietario = propietario;
     }
 }

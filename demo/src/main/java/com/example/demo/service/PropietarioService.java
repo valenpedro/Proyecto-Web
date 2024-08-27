@@ -1,19 +1,20 @@
 package com.example.demo.service;
 
-import java.util.List;
-import java.util.Optional;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
-
 import com.example.demo.model.Propietario;
 import com.example.demo.repository.PropietarioRepository;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
 
 @Service
 public class PropietarioService {
 
-    @Autowired
-    private PropietarioRepository propietarioRepository;
+    private final PropietarioRepository propietarioRepository;
+
+    public PropietarioService(PropietarioRepository propietarioRepository) {
+        this.propietarioRepository = propietarioRepository;
+    }
 
     public List<Propietario> findAll() {
         return propietarioRepository.findAll();

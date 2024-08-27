@@ -38,7 +38,7 @@
                         <p class="card-text">Peso: <span th:text="${pet.weight}"></span> kg</p>
                         <p class="card-text">Enfermedad: <span th:text="${pet.illness}"></span></p>
                         <p class="card-text">Estado: <span th:text="${pet.status}"></span></p>
-                        <p class="card-text">Propietario ID: <span th:text="${pet.ownerId}"></span></p>
+                        <p class="card-text">Propietario: <span th:text="${pet.propietario.nombre}"></span></p>
                     </div>
                     <div class="image-container">
                         <img th:src="${pet.photoUrl}" alt="Foto de Mascota" class="card-img-top">

@@ -4,18 +4,14 @@ import com.example.demo.model.Pet;
 import com.example.demo.model.Propietario;
 import com.example.demo.service.PetService;
 import com.example.demo.service.PropietarioService;
-
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 @RequestMapping("/pets")
@@ -34,6 +30,7 @@ public class PetController {
 
     @GetMapping
     public String viewAllPets(Model model) {
+        logger.info("Request to view all pets");
         List<Pet> pets = petService.getAllPets();
         model.addAttribute("pets", pets);
         return "pets";
@@ -41,19 +38,23 @@ public class PetController {
 
     @GetMapping("/{id}")
     public String viewPetDetails(@PathVariable int id, Model model) {
-        Pet pet = petService.getPetById(id);
-        if (pet != null) {
-            model.addAttribute("pet", pet);
-            Propietario propietario = propietarioService.findById(pet.getOwnerId()).orElse(null);
+        logger.info("Request to view details of pet with id: {}", id);
+        Optional<Pet> pet = petService.getPetById(id);
+        if (pet.isPresent()) {
+            model.addAttribute("pet", pet.get());
+            Propietario propietario = pet.get().getPropietario();
             model.addAttribute("propietario", propietario);
+            logger.info("Displaying details for pet: {}", pet.get());
             return "pet-details";
         } else {
+            logger.warn("Pet with id: {} not found", id);
             return "redirect:/pets";
         }
     }
 
     @GetMapping("/new")
     public String showCreatePetForm(Model model) {
+        logger.info("Request to show form to create a new pet");
         model.addAttribute("pet", new Pet());
         List<Propietario> propietarios = propietarioService.findAll();
         model.addAttribute("propietarios", propietarios);
@@ -61,50 +62,73 @@ public class PetController {
     }
 
     @PostMapping
-	public String savePet(@ModelAttribute Pet pet) {
-		Propietario propietario = propietarioService.findById(pet.getOwnerId()).orElse(null);
-		if (propietario != null) {
-			propietario.addPet(pet); // Agregar la mascota a la lista del propietario
-			propietarioService.save(propietario); // Guardar los cambios en el propietario
-		}
-		petService.savePet(pet); // Guardar la mascota en el repositorio de mascotas
-		return "redirect:/pets";
-	}
-
+    public String savePet(@ModelAttribute Pet pet) {
+        logger.info("Request to save new pet: {}", pet);
+        Optional<Propietario> propietario = propietarioService.findById(pet.getPropietario().getCedula());
+        if (propietario.isPresent()) {
+            pet.setPropietario(propietario.get());
+            petService.savePet(pet);
+            logger.info("Pet saved successfully: {}", pet);
+            return "redirect:/pets";
+        } else {
+            logger.warn("Propietario with id: {} not found, cannot save pet", pet.getPropietario().getCedula());
+            return "redirect:/pets/new";
+        }
+    }
 
     @GetMapping("/edit/{id}")
     public String showEditPetForm(@PathVariable int id, Model model) {
-        Pet pet = petService.getPetById(id);
-        if (pet != null) {
-            model.addAttribute("pet", pet);
+        logger.info("Request to show form to edit pet with id: {}", id);
+        Optional<Pet> pet = petService.getPetById(id);
+        if (pet.isPresent()) {
+            model.addAttribute("pet", pet.get());
             List<Propietario> propietarios = propietarioService.findAll();
             model.addAttribute("propietarios", propietarios);
+            logger.info("Displaying edit form for pet: {}", pet.get());
             return "pet-form";
         } else {
+            logger.warn("Pet with id: {} not found, cannot edit", id);
             return "redirect:/pets";
         }
     }
 
     @PostMapping("/edit/{id}")
     public String updatePet(@PathVariable int id, @ModelAttribute Pet petDetails) {
-        Pet existingPet = petService.getPetById(id);
-        if (existingPet != null) {
-            existingPet.setName(petDetails.getName());
-            existingPet.setBreed(petDetails.getBreed());
-            existingPet.setAge(petDetails.getAge());
-            existingPet.setWeight(petDetails.getWeight());
-            existingPet.setIllness(petDetails.getIllness());
-            existingPet.setPhotoUrl(petDetails.getPhotoUrl());
-            existingPet.setStatus(petDetails.getStatus());
-            existingPet.setOwnerId(petDetails.getOwnerId());
-            petService.savePet(existingPet);
+        logger.info("Request to update pet with id: {}", id);
+        Optional<Pet> existingPet = petService.getPetById(id);
+        if (existingPet.isPresent()) {
+            Pet pet = existingPet.get();
+            pet.setName(petDetails.getName());
+            pet.setBreed(petDetails.getBreed());
+            pet.setAge(petDetails.getAge());
+            pet.setWeight(petDetails.getWeight());
+            pet.setIllness(petDetails.getIllness());
+            pet.setPhotoUrl(petDetails.getPhotoUrl());
+            pet.setStatus(petDetails.getStatus());
+            pet.setPropietario(petDetails.getPropietario());
+            petService.savePet(pet);
+            logger.info("Pet updated successfully: {}", pet);
+        } else {
+            logger.warn("Pet with id: {} not found, cannot update", id);
         }
         return "redirect:/pets";
     }
 
     @GetMapping("/delete/{id}")
-    public String deletePet(@PathVariable int id) {
-        petService.deletePetById(id);
-        return "redirect:/pets";
-    }
+	public String deletePet(@PathVariable int id, Model model) {
+		logger.info("Request to delete pet with id: {}", id);
+		try {
+			petService.deletePetById(id);
+			logger.info("Pet with id: {} deleted successfully", id);
+		} catch (Exception e) {
+			logger.error("Failed to delete pet with id: {}", id, e);
+		}
+
+		// Recargar la lista de mascotas después de la eliminación
+		List<Pet> pets = petService.getAllPets();
+		model.addAttribute("pets", pets);
+
+		return "redirect:/pets";
+	}
+
 }
