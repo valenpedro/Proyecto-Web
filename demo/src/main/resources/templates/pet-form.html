@@ -40,7 +40,6 @@
                     <option value="Inactivo" th:text="'Inactivo'" th:selected="${pet.status == 'Inactivo'}">Inactivo</option>
                 </select>
 
-                <label for="owner">Propietario:</label>
 				<label for="owner">Propietario:</label>
 				<select id="owner" th:field="*{propietario}">
 					<option th:each="propietario : ${propietarios}" th:value="${propietario.cedula}" th:text="${propietario.nombre}"></option>
