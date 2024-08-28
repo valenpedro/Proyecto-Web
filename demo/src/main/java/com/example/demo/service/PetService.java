@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Pet;
+import com.example.demo.model.Propietario;
 import com.example.demo.repository.PetRepository;
 
 import jakarta.persistence.EntityManager;
@@ -20,11 +21,11 @@ public class PetService {
     private static final Logger logger = LoggerFactory.getLogger(PetService.class);
 
     private final PetRepository petRepository;
-	@PersistenceContext
-    private EntityManager entityManager;
+    private final PropietarioService propietarioService;
 
-    public PetService(PetRepository petRepository) {
+    public PetService(PetRepository petRepository, PropietarioService propietarioService) {
         this.petRepository = petRepository;
+        this.propietarioService = propietarioService;
     }
 
     public List<Pet> getAllPets() {
@@ -43,33 +44,25 @@ public class PetService {
     }
 
     @Transactional
-	public void deletePetById(int id) {
-		logger.info("Attempting to delete pet with id: {}", id);
-		
-		// Verificar si la mascota existe
-		Optional<Pet> petOpt = petRepository.findById(id);
-		if (petOpt.isPresent()) {
-			Pet pet = petOpt.get();
-			
-			// Eliminar la mascota usando EntityManager
-			entityManager.remove(entityManager.contains(pet) ? pet : entityManager.merge(pet));
-			entityManager.flush();
+    public void deletePetById(int id) {
+        logger.info("Attempting to delete pet with id: {}", id);
 
-			// Forzar una consulta directa para confirmar la eliminación
-			boolean exists = entityManager.createQuery("SELECT COUNT(p) FROM Pet p WHERE p.id = :id", Long.class)
-										.setParameter("id", id)
-										.getSingleResult() > 0;
+        Optional<Pet> petOpt = petRepository.findById(id);
+        if (petOpt.isPresent()) {
+            Pet pet = petOpt.get();
+            Propietario propietario = pet.getPropietario();
 
-			if (exists) {
-				logger.error("Pet with id: {} still exists after deletion attempt.", id);
-				throw new RuntimeException("Failed to delete pet with id: " + id);
-			} else {
-				logger.info("Pet with id: {} successfully deleted.", id);
-			}
-		} else {
-			logger.warn("Pet with id: {} not found, cannot delete", id);
-		}
-	}
+            // Eliminar la mascota de la lista de mascotas del propietario
+            propietario.getMascotas().remove(pet);
+            
+            // Guardar el propietario para sincronizar la relación
+            propietarioService.save(propietario);
 
-	
+            // Ahora eliminar la mascota de la base de datos
+            petRepository.deleteById(id);
+            logger.info("Pet with id: {} deleted successfully", id);
+        } else {
+            logger.warn("Pet with id: {} not found, cannot delete", id);
+        }
+    }
 }
