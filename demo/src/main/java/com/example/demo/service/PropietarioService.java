@@ -3,6 +3,7 @@ package com.example.demo.service;
 import com.example.demo.model.Propietario;
 import com.example.demo.repository.PropietarioRepository;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,15 +21,20 @@ public class PropietarioService {
         return propietarioRepository.findAll();
     }
 
-    public Optional<Propietario> findById(String cedula) {
-        return propietarioRepository.findById(cedula);
+    public Optional<Propietario> findById(Long id) {
+        return propietarioRepository.findById(id);
+    }
+
+    public Optional<Propietario> findByCedula(String cedula) {
+        return propietarioRepository.findByCedula(cedula);
     }
 
     public Propietario save(Propietario propietario) {
         return propietarioRepository.save(propietario);
     }
 
-    public void deleteById(String cedula) {
-        propietarioRepository.deleteById(cedula);
+    @Transactional
+    public void deleteByCedula(String cedula) {
+        propietarioRepository.deleteByCedula(cedula);
     }
 }

@@ -9,6 +9,8 @@
     <div class="container">
         <h1 th:text="${isEdit} ? 'Editar Propietario' : 'Nuevo Propietario'">Formulario de Propietario</h1>
         <form th:action="@{${isEdit} ? '/propietarios/editar/' + ${propietario.cedula} : '/propietarios/nuevo'}" th:object="${propietario}" method="post">
+
+            <!-- Aquí ya no es necesario usar el ID en el campo del formulario, solo para las rutas -->
             <label for="cedula">Cédula:</label>
             <input type="text" id="cedula" th:field="*{cedula}" />
 

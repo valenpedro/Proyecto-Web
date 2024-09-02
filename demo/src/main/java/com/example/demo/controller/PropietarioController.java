@@ -39,7 +39,7 @@ public class PropietarioController {
 
     @GetMapping("/editar/{cedula}")
     public String showEditForm(@PathVariable String cedula, Model model) {
-        Optional<Propietario> propietario = propietarioService.findById(cedula);
+        Optional<Propietario> propietario = propietarioService.findByCedula(cedula);
         if (propietario.isPresent()) {
             model.addAttribute("propietario", propietario.get());
             model.addAttribute("isEdit", true);
@@ -51,7 +51,7 @@ public class PropietarioController {
 
     @PostMapping("/editar/{cedula}")
     public String updatePropietario(@PathVariable String cedula, @ModelAttribute Propietario propietarioDetails) {
-        Optional<Propietario> propietario = propietarioService.findById(cedula);
+        Optional<Propietario> propietario = propietarioService.findByCedula(cedula);
         if (propietario.isPresent()) {
             Propietario updatedPropietario = propietario.get();
             updatedPropietario.setNombre(propietarioDetails.getNombre());
@@ -65,7 +65,7 @@ public class PropietarioController {
 
     @GetMapping("/eliminar/{cedula}")
     public String deletePropietario(@PathVariable String cedula) {
-        propietarioService.deleteById(cedula);
+        propietarioService.deleteByCedula(cedula);
         return "redirect:/propietarios";
     }
 }

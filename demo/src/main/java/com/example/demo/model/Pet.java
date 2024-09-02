@@ -1,6 +1,8 @@
 package com.example.demo.model;
 
 import jakarta.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 public class Pet {
@@ -19,6 +21,9 @@ public class Pet {
     @ManyToOne
     @JoinColumn(name = "propietario_id", nullable = false)
     private Propietario propietario; // Referencia al propietario
+
+    @OneToMany(mappedBy = "mascota", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Tratamiento> tratamientos = new ArrayList<>();
 
     // Constructor con todos los campos
     public Pet(String name, String breed, int age, float weight, String illness, String photoUrl, String status, Propietario propietario) {
@@ -106,5 +111,23 @@ public class Pet {
 
     public void setPropietario(Propietario propietario) {
         this.propietario = propietario;
+    }
+
+    public List<Tratamiento> getTratamientos() {
+        return tratamientos;
+    }
+
+    public void setTratamientos(List<Tratamiento> tratamientos) {
+        this.tratamientos = tratamientos;
+    }
+
+    public void addTratamiento(Tratamiento tratamiento) {
+        tratamientos.add(tratamiento);
+        tratamiento.setMascota(this);
+    }
+
+    public void removeTratamiento(Tratamiento tratamiento) {
+        tratamientos.remove(tratamiento);
+        tratamiento.setMascota(null);
     }
 }

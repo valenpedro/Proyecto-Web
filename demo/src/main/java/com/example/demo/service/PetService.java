@@ -3,10 +3,7 @@ package com.example.demo.service;
 import com.example.demo.model.Pet;
 import com.example.demo.model.Propietario;
 import com.example.demo.repository.PetRepository;
-
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-
+import com.example.demo.repository.TratamientoRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
@@ -22,10 +19,12 @@ public class PetService {
 
     private final PetRepository petRepository;
     private final PropietarioService propietarioService;
+    private final TratamientoRepository tratamientoRepository;
 
-    public PetService(PetRepository petRepository, PropietarioService propietarioService) {
+    public PetService(PetRepository petRepository, PropietarioService propietarioService, TratamientoRepository tratamientoRepository) {
         this.petRepository = petRepository;
         this.propietarioService = propietarioService;
+        this.tratamientoRepository = tratamientoRepository;
     }
 
     public List<Pet> getAllPets() {
@@ -50,12 +49,13 @@ public class PetService {
         Optional<Pet> petOpt = petRepository.findById(id);
         if (petOpt.isPresent()) {
             Pet pet = petOpt.get();
-            Propietario propietario = pet.getPropietario();
+
+            // Eliminar tratamientos asociados antes de eliminar la mascota
+            tratamientoRepository.deleteByMascota(pet);
 
             // Eliminar la mascota de la lista de mascotas del propietario
+            Propietario propietario = pet.getPropietario();
             propietario.getMascotas().remove(pet);
-            
-            // Guardar el propietario para sincronizar la relación
             propietarioService.save(propietario);
 
             // Ahora eliminar la mascota de la base de datos
