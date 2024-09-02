@@ -1,225 +1,377 @@
-/* Estilos globales */
-body {
-    font-family: 'Inter', sans-serif;
-    background-color: #F4F7FA;
+/*
+Responsive HTML Table With Pure CSS - Web Design/UI Design
+
+Code written by:
+👨🏻‍⚕️ Coding Design (Jeet Saru)
+
+> You can do whatever you want with the code. However if you love my content, you can **SUBSCRIBED** my YouTube Channel.
+
+🌎link: www.youtube.com/codingdesign 
+*/
+
+* {
     margin: 0;
     padding: 0;
-    display: flex;
-    flex-direction: column;
+
+    box-sizing: border-box;
+    font-family: sans-serif;
+}
+@media print {
+ .table, .table__body {
+  overflow: visible;
+  height: auto !important;
+  width: auto !important;
+ }
+}
+
+/*@page {
+    size: landscape;
+    margin: 0; 
+}*/
+
+body {
     min-height: 100vh;
-}
 
-/* Encabezado */
-#header  {
+    background:linear-gradient(to left top, #7FC7D9, #DCF2F1);
     display: flex;
-    padding: 15px 30px;
-    gap: 15px;
-    justify-content: end;
-    position: absolute;
-    top: 0;
-    right: 0;
-    margin-top: 30px;
-    margin-right: 20px;
-    background-color: #fbf3f3;
-    border-radius: 40px;
-    z-index: 1000;
-}
-
-#logo {
-    display: flex;
+    justify-content: center;
     align-items: center;
 }
 
-#logo img {
-    width: 150px;
+main.table {
+    width: 82vw;
+    height: 90vh;
+    background-color: #0F1035;
+    backdrop-filter: blur(7px);
+    box-shadow: 0 .4rem .8rem #DCF2F1;
+    border-radius: .8rem;
+
+    overflow: hidden;
 }
 
-/* Navegación */
-nav ul {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    gap: 20px;
-}
-
-nav ul li {
-    display: inline;
-}
-
-nav ul li a {
-    color: white;
-    text-decoration: none;
-    font-size: 16px;
-    font-weight: 600;
-    padding: 10px 15px;
-}
-
-nav ul li a.button {
-    background-color: #f4a261;
-    padding: 8px 16px;
-    border-radius: 5px;
-    transition: background-color 0.3s ease;
-}
-
-nav ul li a.button:hover {
-    background-color: #e76f51;
-}
-
-/* Contenedor principal */
-.container {
-    margin: 20px auto;
-    width: 90%;
-    max-width: 1200px;
-    padding: 20px;
-    background: #ffffff;
-    border-radius: 10px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    text-align: center;
-}
-
-/* Título principal */
-.page-title {
-    font-size: 32px;
-    font-weight: 700;
-    color: #0f1035;
-    margin-top: 10px; /* Reduce el margen superior */
-    margin-bottom: 20px;
-}
-
-/* Botón primario */
-.btn-primary {
-    display: inline-block;
-    margin-bottom: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    font-weight: 600;
-    color: white;
-    background-color: #0f1035;
-    border-radius: 5px;
-    text-decoration: none;
-    transition: background-color 0.3s ease;
-}
-
-.btn-primary:hover {
-    background-color: #365486;
-}
-
-/* Contenedor de la tabla */
-.table-container {
-    overflow-x: auto;
-    margin-top: 20px;
-}
-
-/* Estilo de la tabla */
-.styled-table {
+.table__header {
     width: 100%;
-    border-collapse: collapse;
-    font-size: 16px;
+    height: 10%;
+    background-color: #fff4;
+    padding: .8rem 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-radius: 50px;
 }
 
-.styled-table thead tr {
-    background-color: #0f1035;
-    color: #ffffff;
-    text-align: center;
-    font-weight: bold;
-}
+.table__header .input-group {
+    width: 35%;
+    height: 100%;
+    background-color: #fff5;
+    padding: 0 .8rem;
+    border-radius: 2rem;
 
-.styled-table th, .styled-table td {
-    padding: 12px;
-    border: none;
-    text-align: center;
-}
-
-.styled-table tbody tr {
-    border-bottom: 1px solid #dddddd;
-}
-
-.styled-table tbody tr:nth-child(even) {
-    background-color: #f3f3f3;
-}
-
-.styled-table tbody tr:last-child {
-    border-bottom: 2px solid #0f1035;
-}
-
-.styled-table tbody tr:hover {
-    background-color: #e9f5f9;
-}
-
-/* Botones de acción */
-.action-buttons {
     display: flex;
     justify-content: center;
-    gap: 10px;
+    align-items: center;
+
+    transition: .2s;
 }
 
-.btn-edit, .btn-delete {
-    text-decoration: none;
-    padding: 8px 15px;
-    font-size: 14px;
-    font-weight: 600;
-    border-radius: 5px;
-    color: #ffffff;
-    transition: background-color 0.3s ease;
+.table__header .input-group:hover {
+    width: 45%;
+    background-color: #fff8;
+    box-shadow: 0 .1rem .4rem #0002;
 }
 
-.btn-edit {
-    background-color: #3498db;
+.table__header .input-group img {
+    width: 1.2rem;
+    height: 1.2rem;
 }
 
-.btn-edit:hover {
-    background-color: #2980b9;
+.table__header .input-group input {
+    width: 100%;
+    padding: 0 .5rem 0 .3rem;
+    background-color: transparent;
+    border: none;
+    outline: none;
 }
 
-.btn-delete {
-    background-color: #365486;
+.table__body {
+    width: 95%;
+    max-height: calc(89% - 1.6rem);
+    background-color: #DCF2F1;
+
+    margin: .8rem auto;
+    border-radius: .6rem;
+
+    overflow: auto;
+    overflow: overlay;
 }
 
-.btn-delete:hover {
-    background-color: #365486;
+
+.table__body::-webkit-scrollbar{
+    width: 0.5rem;
+    height: 0.5rem;
+}
+
+.table__body::-webkit-scrollbar-thumb{
+    border-radius: .5rem;
+    background-color: #0004;
+    visibility: hidden;
+}
+
+.table__body:hover::-webkit-scrollbar-thumb{ 
+    visibility: visible;
+}
+
+.table__header h1{
+    margin-top: -900px;
+}
+
+
+
+table {
+    width: 100%;
+}
+
+td img {
+    width: 36px;
+    height: 36px;
+    margin-right: .5rem;
+    border-radius: 50%;
+
+    vertical-align: middle;
+}
+
+table, th, td {
+    border-collapse: collapse;
+    padding: 1rem;
+    text-align: left;
+}
+
+thead th {
+    position: sticky;
+    top: 0;
+    left: 0;
+    background-color: #;
+    cursor: pointer;
+    text-transform: capitalize;
+}
+
+tbody tr:nth-child(even) {
+    background-color: #0000000b;
+}
+
+tbody tr {
+    --delay: .1s;
+    transition: .5s ease-in-out var(--delay), background-color 0s;
+}
+
+tbody tr.hide {
+    opacity: 0;
+    transform: translateX(100%);
+}
+
+tbody tr:hover {
+    background-color: #fff6 !important;
+}
+
+tbody tr td,
+tbody tr td p,
+tbody tr td img {
+    transition: .2s ease-in-out;
+}
+
+tbody tr.hide td,
+tbody tr.hide td p {
+    padding: 0;
+    font: 0 / 0 sans-serif;
+    transition: .2s ease-in-out .5s;
+}
+
+tbody tr.hide td img {
+    width: 0;
+    height: 0;
+    transition: .2s ease-in-out .5s;
+}
+
+
+
+.table__body .status.activo {
+    text-align: center;
+    background-color: #86e49d;
+    color: #006b21;
+}
+
+.table__body .status.inactivo {
+    text-align: center;
+    background-color: #d893a3;
+    color: #b30021;
+}
+
+
+@media (max-width: 1000px) {
+    td:not(:first-of-type) {
+        min-width: 12.1rem;
+    }
+}
+
+thead th span.icon-arrow {
+    display: inline-block;
+    width: 1.3rem;
+    height: 1.3rem;
+    border-radius: 50%;
+    border: 1.4px solid transparent;
+    
+    text-align: center;
+    font-size: 1rem;
+    
+    margin-left: .5rem;
+    transition: .2s ease-in-out;
+}
+
+thead th:hover span.icon-arrow{
+    border: 1.4px solid #365486;
+}
+
+thead th:hover {
+    color: #365486;
+}
+
+thead th.active span.icon-arrow{
+    background-color: #6c00bd;
+    color: #fff;
+}
+
+thead th.asc span.icon-arrow{
+    transform: rotate(180deg);
+}
+
+thead th.active,tbody td.active {
+    color: #6c00bd;
+}
+
+.export__file {
+    position: relative;
+}
+
+.export__file .export__file-btn {
+    display: inline-block;
+    width: 2rem;
+    height: 2rem;
+    background: #fff6 url(images/export.png) center / 80% no-repeat;
+    border-radius: 50%;
+    transition: .2s ease-in-out;
+}
+
+.export__file .export__file-btn:hover { 
+    background-color: black;
+    transform: scale(1.15);
+    cursor: pointer;
+}
+
+.export__file input {
+    display: none;
+}
+
+.export__file .export__file-options {
+    position: absolute;
+    right: 0;
+    
+    width: 12rem;
+    border-radius: .5rem;
+    overflow: hidden;
+    text-align: center;
+
+    opacity: 0;
+    transform: scale(.8);
+    transform-origin: top right;
+    
+    box-shadow: 0 .2rem .5rem #0004;
+    
+    transition: .2s;
+}
+
+.export__file input:checked + .export__file-options {
+    opacity: 1;
+    transform: scale(1);
+    z-index: 100;
+}
+
+.export__file .export__file-options label{
+    display: block;
+    width: 100%;
+    padding: .6rem 0;
+    background-color: #f2f2f2;
+    
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+    transition: .2s ease-in-out;
+}
+
+.export__file .export__file-options label:first-of-type{
+    padding: 1rem 0;
+    background-color: #86e49d !important;
+}
+
+.export__file .export__file-options label:hover{
+    transform: scale(1.05);
+    background-color: #fff;
+    cursor: pointer;
+}
+
+.export__file .export__file-options img{
+    width: 2rem;
+    height: auto;
 }
 
 /* Footer decorativo */
 .footer-decorativa {
-    width: 100%;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 60%; /* Asegura que el footer ocupe el ancho completo */
     height: auto;
-    margin-top: 20px;
+    background-color: transparent;
+    z-index: 1; /* Footer detrás del contenido */
 }
 
-/* Responsividad */
-@media (max-width: 768px) {
-    #header {
-        flex-direction: column;
-        padding: 10px;
-    }
+/* Estilo para los botones de acciones */
+.btn-detalles, .btn-editar, .btn-eliminar {
+    display: inline-block;
+    padding: 8px 12px;
+    margin: 0 5px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
 
-    nav ul {
-        flex-direction: column;
-        gap: 10px;
-    }
+.btn-crear {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: #007bff; /* Cambia esto a tu color deseado */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    margin-left: 38px;
+    font-weight: bold;
+}
 
-    .container {
-        width: 95%;
-        padding: 15px;
-    }
+.btn-crear:hover {
+    background-color: #0056b3; /* Cambia esto a un color más oscuro para el hover */
+}
 
-    .page-title {
-        font-size: 28px;
-    }
+.btn-editar {
+    background-color: #7FC7D9; /* Amarillo para "Editar" */
+    color: black;
+}
 
-    .btn-primary {
-        font-size: 14px;
-        padding: 8px 16px;
-    }
-
-    .styled-table th, .styled-table td {
-        font-size: 14px;
-        padding: 10px;
-    }
-
-    .btn-edit, .btn-delete {
-        font-size: 12px;
-        padding: 6px 10px;
-    }
+.btn-eliminar {
+    background-color: #DC3545; /* Rojo para "Eliminar" */
+    color: white;
 }

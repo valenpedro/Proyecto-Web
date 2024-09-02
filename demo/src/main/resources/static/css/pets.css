@@ -363,3 +363,21 @@ thead th.active,tbody td.active {
     background-color: #DC3545; /* Rojo para "Eliminar" */
     color: white;
 }
+
+.btn-crear {
+    display: inline-block;
+    padding: 10px 20px;
+    margin-top: 10px;
+    background-color: #007bff; /* Cambia esto a tu color deseado */
+    color: #fff;
+    text-decoration: none;
+    border-radius: 5px;
+    font-size: 16px;
+    text-align: center;
+    margin-left: 38px;
+    font-weight: bold;
+}
+
+.btn-crear:hover {
+    background-color: #0056b3; /* Cambia esto a un color más oscuro para el hover */
+}
