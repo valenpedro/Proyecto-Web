@@ -14,8 +14,12 @@ import java.util.Optional;
 @RequestMapping("/propietarios")
 public class PropietarioController {
 
+    private final PropietarioService propietarioService;
+
     @Autowired
-    private PropietarioService propietarioService;
+    public PropietarioController(PropietarioService propietarioService) {
+        this.propietarioService = propietarioService;
+    }
 
     @GetMapping
     public String getAllPropietarios(Model model) {

@@ -5,12 +5,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class RedirectController {
-    
+
     @GetMapping("/templates/login.html")
     public String redirectToLogin() {
         return "redirect:/login";
     }
-	@GetMapping("/login.html")
+
+    @GetMapping("/login.html")
     public String redirectLogin() {
         return "redirect:/login";
     }
@@ -20,14 +21,13 @@ public class RedirectController {
         return "redirect:/login";
     }
 
-	@GetMapping("/propietarios/")
+    @GetMapping("/propietarios/")
     public String redirectPropietarios() {
         return "redirect:/propietarios";
     }
 
-	@GetMapping("/pets/")
+    @GetMapping("/pets/")
     public String redirectPets() {
         return "redirect:/pets";
     }
-	
 }
