@@ -30,6 +30,7 @@
                         <th> Nombre <span class="icon-arrow">&UpArrow;</span></th>
                         <th> Raza <span class="icon-arrow">&UpArrow;</span></th>
                         <th> Edad <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Enfermerdad <span class="icon-arrow">&UpArrow;</span></th>
                         <th> Cédula Propietario <span class="icon-arrow">&UpArrow;</span></th>
                         <th> Foto <span class="icon-arrow">&UpArrow;</span></th>
                         <th> Estado <span class="icon-arrow">&UpArrow;</span></th>
@@ -42,6 +43,7 @@
                         <td th:text="${pet.name}"></td>
                         <td th:text="${pet.breed}"></td>
                         <td th:text="${pet.age}"></td>
+                        <td th:text="${pet.illness}"></td>
                         <td th:text="${pet.propietario.cedula}"></td>
                         <td><img th:src="${pet.photoUrl}" alt="Foto de Mascota" class="pet-photo"></td>
                         <td th:text="${pet.status}" th:classappend="'status ' + (${pet.status} == 'Activo' ? 'activo' : 'inactivo')"></td>
