@@ -17,7 +17,7 @@ public class Pet {
     private String status;
 
     @ManyToOne
-    @JoinColumn(name = "propietario_cedula", nullable = false)
+    @JoinColumn(name = "propietario_id", nullable = false)
     private Propietario propietario; // Referencia al propietario
 
     // Constructor con todos los campos

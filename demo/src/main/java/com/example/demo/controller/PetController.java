@@ -4,7 +4,6 @@ import com.example.demo.model.Pet;
 import com.example.demo.model.Propietario;
 import com.example.demo.service.PetService;
 import com.example.demo.service.PropietarioService;
-
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +64,7 @@ public class PetController {
     }
 
     @PostMapping
-    public String savePet(@ModelAttribute Pet pet) {
+    public String savePet(@ModelAttribute Pet pet, Model model) {
         logger.info("Request to save new pet: {}", pet);
         Optional<Propietario> propietario = propietarioService.findById(pet.getPropietario().getCedula());
         if (propietario.isPresent()) {
@@ -75,7 +74,8 @@ public class PetController {
             return "redirect:/pets";
         } else {
             logger.warn("Propietario with id: {} not found, cannot save pet", pet.getPropietario().getCedula());
-            return "redirect:/pets/new";
+            model.addAttribute("error", "Propietario no encontrado.");
+            return "pet-form";
         }
     }
 
@@ -118,20 +118,14 @@ public class PetController {
     }
 
     @GetMapping("/delete/{id}")
-	public String deletePet(@PathVariable int id, Model model) {
-		logger.info("Request to delete pet with id: {}", id);
-		try {
-			petService.deletePetById(id);
-			logger.info("Pet with id: {} deleted successfully", id);
-		} catch (Exception e) {
-			logger.error("Failed to delete pet with id: {}", id, e);
-		}
-
-		// Recargar la lista de mascotas después de la eliminación
-		List<Pet> pets = petService.getAllPets();
-		model.addAttribute("pets", pets);
-
-		return "redirect:/pets";
-	}
-
+    public String deletePet(@PathVariable int id, Model model) {
+        logger.info("Request to delete pet with id: {}", id);
+        try {
+            petService.deletePetById(id);
+            logger.info("Pet with id: {} deleted successfully", id);
+        } catch (Exception e) {
+            logger.error("Failed to delete pet with id: {}", id, e);
+        }
+        return "redirect:/pets";
+    }
 }
