@@ -1,50 +1,39 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Lista de Mascotas - Dogin</title>
-    <link rel="stylesheet" href="/css/index.css">
-    <link rel="stylesheet" href="/css/pets.css">
+    <link rel="stylesheet" href="/css/index.css" />
+    <link rel="stylesheet" href="/css/pets.css" />
+
+    <script src="/JavaScript/pets.js" defer></script>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
     />
-</head>
-<body>
-    <!-- Barra de navegación -->
-    <header id="header">
-        <div id="logo">
-            <img src="/images/logo.png" alt="Dogin Logo" />
-        </div>
-        <ul>
-            <li><a href="/">Inicio</a></li>
-            <li><a href="#servicios">Servicios</a></li>
-            <li><a href="#sobre">Sobre Nosotros</a></li>
-            <li><a href="#contacto">Contacto</a></li>
-            <li><a href="login.html" class="button">Iniciar Sesión</a></li>
-        </ul>
-    </header>
-    
-    <main>
-        <h1 class="servicios">Todas las Mascotas</h1>
-        <!-- Botón para crear una nueva mascota -->
-        <div class="button-container">
-            <a href="/pets/new" class="btn-testimonios">Crear Nueva Mascota</a>
-        </div>
-
-        <div class="container">
+  </head>
+  <body>
+    <main class="table" id="customers_table">
+        <section class="table__header">
+            <h1>MASCOTAS</h1>
+            <div class="input-group">
+                <input type="search" placeholder="Search Data...">
+                <img src="images/search.png" alt="">
+            </div>
+        </section>
+        <section class="table__body">
             <table>
                 <thead>
                     <tr>
-                        <th>ID</th>
-                        <th>Nombre</th>
-                        <th>Raza</th>
-                        <th>Edad</th>
-                        <th>Propietario ID</th>
-                        <th>Foto</th>
-                        <th>Estado</th>
-                        <th>Acciones</th> <!-- Cambié "Detalles" a "Acciones" -->
+                        <th> ID <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Nombre <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Raza <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Edad <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Propietario ID <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Foto <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Estado <span class="icon-arrow">&UpArrow;</span></th>
+                        <th> Acciones <span class="icon-arrow">&UpArrow;</span></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -55,21 +44,22 @@
                         <td th:text="${pet.age}"></td>
                         <td th:text="${pet.propietario.cedula}"></td>
                         <td><img th:src="${pet.photoUrl}" alt="Foto de Mascota" class="pet-photo"></td>
-                        <td th:text="${pet.status}"></td>
+                        <td th:text="${pet.status}" th:classappend="'status ' + (${pet.status} == 'Activo' ? 'activo' : 'inactivo')"></td>
+
+
+                        <!--BOTONES DE ACCIONES-->
                         <td>
-                            <a th:href="@{/pets/{id}(id=${pet.id})}" class="btn-testimonios">Ver Detalles</a>
-                            <a th:href="@{/pets/edit/{id}(id=${pet.id})}" class="btn-testimonios">Editar</a>
-                            <a th:href="@{/pets/delete/{id}(id=${pet.id})}" class="btn-testimonios" 
-                               onclick="return confirm('¿Estás seguro de que deseas eliminar esta mascota?');">Eliminar</a>
+                            <a th:href="@{/pets/{id}(id=${pet.id})}" class="btn-detalles">Ver Detalles</a>
+                            <a th:href="@{/pets/edit/{id}(id=${pet.id})}" class="btn-editar">Editar</a>
+                            <a th:href="@{/pets/delete/{id}(id=${pet.id})}" class="btn-eliminar" 
+                            onclick="return confirm('¿Estás seguro de que deseas eliminar esta mascota?');">Eliminar</a>
                         </td>
+
                     </tr>
                 </tbody>
             </table>
-        </div>
+        </section>
     </main>
-
     <img src="/images/footer.png" alt="Footer Decorativo" class="footer-decorativa" />
-    
-    <script src="/JavaScript/script.js" defer></script>
-</body>
+  </body>
 </html>

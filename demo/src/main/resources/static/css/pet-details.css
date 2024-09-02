@@ -12,7 +12,7 @@ body {
 /* Ajustes del contenedor principal */
 .container {
     margin-top: -50px;
-    max-width: 40%; /* Cambiado de 60% a 40% para hacerlo más estrecho */
+    max-width: 300%; /* Cambiado de 60% a 40% para hacerlo más estrecho */
     margin-left: auto;
     margin-right: auto;
     padding: 20px; /* Reducido de 30px a 20px */
