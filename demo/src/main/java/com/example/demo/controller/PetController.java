@@ -4,8 +4,10 @@ import com.example.demo.model.Pet;
 import com.example.demo.model.Propietario;
 import com.example.demo.service.PetService;
 import com.example.demo.service.PropietarioService;
+
 import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +24,7 @@ public class PetController {
     private final PetService petService;
     private final PropietarioService propietarioService;
 
+    @Autowired
     public PetController(PetService petService, PropietarioService propietarioService) {
         this.petService = petService;
         this.propietarioService = propietarioService;
