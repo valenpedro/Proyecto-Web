@@ -8,16 +8,21 @@ import java.util.List;
 public class Propietario {
 
     @Id
-    private String cedula;
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id; // Clave primaria autogenerada
+
+    @Column(unique = true, nullable = false)
+    private String cedula; // Cédula única, pero no clave primaria
+    
     private String nombre;
     private String correo;
     private String celular;
     private String contrasena;
 
     @OneToMany(mappedBy = "propietario", cascade = CascadeType.ALL, orphanRemoval = true, fetch = FetchType.EAGER)
-	private List<Pet> mascotas = new ArrayList<>();
+    private List<Pet> mascotas = new ArrayList<>();
 
-    // Constructor con todos los campos
+    // Constructor con todos los campos excepto el ID
     public Propietario(String cedula, String nombre, String correo, String celular, String contrasena) {
         this.cedula = cedula;
         this.nombre = nombre;
@@ -30,6 +35,14 @@ public class Propietario {
     public Propietario() {}
 
     // Getters y Setters
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
     public String getCedula() {
         return cedula;
     }
