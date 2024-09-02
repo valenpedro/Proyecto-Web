@@ -1,27 +1,26 @@
 package com.example.demo.config;
 
-import com.example.demo.model.Pet;
-import com.example.demo.model.Propietario;
-import com.example.demo.repository.PetRepository;
-import com.example.demo.repository.PropietarioRepository;
+import com.example.demo.model.*;
+import com.example.demo.repository.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Random;
-import java.util.Set;
+import java.util.*;
 
 @Configuration
 public class DataLoader {
 
     @Bean
-    CommandLineRunner loadData(PropietarioRepository propietarioRepository, PetRepository petRepository) {
+    CommandLineRunner loadData(PropietarioRepository propietarioRepository, PetRepository petRepository,
+                               VeterinarioRepository veterinarioRepository, MedicamentoRepository medicamentoRepository,
+                               TratamientoRepository tratamientoRepository, AdministradorRepository administradorRepository) {
         return args -> {
             List<Propietario> propietarios = new ArrayList<>();
             List<Pet> mascotas = new ArrayList<>();
+            List<Veterinario> veterinarios = new ArrayList<>();
+            List<Medicamento> medicamentos = new ArrayList<>();
+            List<Tratamiento> tratamientos = new ArrayList<>();
             Set<Long> cedulasGeneradas = new HashSet<>();
 
             // Generar 50 propietarios con cédulas únicas de 10 dígitos
@@ -72,6 +71,61 @@ public class DataLoader {
                 }
             }
             petRepository.saveAll(mascotas);
+
+            // Generar 10 veterinarios
+            for (int i = 1; i <= 10; i++) {
+                long cedula;
+                do {
+                    cedula = 1000000000L + (long) (random.nextDouble() * 9000000000L);
+                } while (cedulasGeneradas.contains(cedula)); // Asegura que la cédula sea única
+                cedulasGeneradas.add(cedula);
+
+                Veterinario veterinario = new Veterinario(
+                        String.valueOf(cedula),
+                        "Veterinario " + i,
+                        "Especialidad " + i,
+                        random.nextInt(100), // Número de atenciones
+                        "password" + i
+                );
+                veterinarios.add(veterinario);
+            }
+            veterinarioRepository.saveAll(veterinarios);
+
+            // Generar 20 medicamentos
+            String[] nombresMedicamentos = {"Medicamento A", "Medicamento B", "Medicamento C", "Medicamento D", "Medicamento E"};
+            for (int i = 1; i <= 20; i++) {
+                Medicamento medicamento = new Medicamento(
+                        nombresMedicamentos[random.nextInt(nombresMedicamentos.length)],
+                        random.nextFloat() * 50, // Precio de compra
+                        random.nextFloat() * 100, // Precio de venta
+                        random.nextInt(100), // Unidades disponibles
+                        random.nextInt(50) // Unidades vendidas
+                );
+                medicamentos.add(medicamento);
+            }
+            medicamentoRepository.saveAll(medicamentos);
+
+            // Generar 30 tratamientos
+            for (int i = 1; i <= 30; i++) {
+                Tratamiento tratamiento = new Tratamiento(
+                        new Date(),
+                        mascotas.get(random.nextInt(mascotas.size())),
+                        veterinarios.get(random.nextInt(veterinarios.size())),
+                        medicamentos.get(random.nextInt(medicamentos.size()))
+                );
+                tratamientos.add(tratamiento);
+            }
+            tratamientoRepository.saveAll(tratamientos);
+
+            // Generar 3 administradores
+            for (int i = 1; i <= 3; i++) {
+                Administrador administrador = new Administrador(
+                        "admin" + i,
+                        "Administrador " + i,
+                        "admin" + i + "@example.com"
+                );
+                administradorRepository.save(administrador);
+            }
         };
     }
 }
