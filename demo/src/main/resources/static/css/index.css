@@ -150,6 +150,8 @@ main h1 {
 
 .btn-testimonios:hover {
   color: white; /* Mantiene el color blanco al pasar el cursor */
+  background-color: #202379;
+  transition: all 0.3s ease-in-out;
   text-decoration: none; /* Asegura que no haya subrayado al pasar el cursor */
 }
 
@@ -359,7 +361,7 @@ main h1 {
 }
 
 .item:hover {
-  transform: scale(1.5);
+  transform: scale(1.08);
   transition: all 350ms ease-in-out;
 }
 
@@ -432,12 +434,15 @@ main h1 {
 /* Estilos de la carta (ya proporcionados) */
 .card3 {
   background-color: #365486;
-  padding: 5rem;
+  padding-top: 2.5rem;
+  padding-bottom: -1rem;
+  padding-left: 4rem;
+  padding-right: 4rem;
   width: 1300px;
   height: 350px;
   border-radius: 25px;
   box-shadow: 0 20px 30px -20px rgba(5, 5, 5, 0.24);
-  margin: 0 10px; /* Añadir margen izquierdo y derecho */
+  margin: 0 15px; /* Añadir margen izquierdo y derecho */
 }
 
 .header {
