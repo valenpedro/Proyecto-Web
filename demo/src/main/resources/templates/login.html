@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Iniciar Sesión - Dogin</title>
     <link rel="stylesheet" href="/css/login.css" />
+    <script src="/JavaScript/login.js" defer></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;900&display=swap"
       rel="stylesheet"
@@ -25,11 +26,19 @@
       alt="Footer Decorativo"
       class="footer-decorativa"
     />
+
     <div class="container">
         <div class="login-box">
             <img src="/images/logo.png" alt="Dogin Logo" class="logo" />
             <h2>Iniciar Sesión</h2>
-            <form action="/login" method="post">
+            <form id="loginForm" action="/login" method="post">
+
+              <div class="role-selection">
+                <label><input type="radio" name="role" value="veterinario" required> Veterinario</label><br />
+                <label><input type="radio" name="role" value="administrador" required> Administrador</label><br />
+                <label><input type="radio" name="role" value="dueno" required> Dueño de Mascota</label>
+            </div>
+
 				<div class="input-group">
 					<label for="email"><i class="fas fa-envelope"></i> Correo Electrónico</label>
 					<input type="email" id="email" name="email" required />
