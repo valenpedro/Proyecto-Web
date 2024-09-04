@@ -4,31 +4,167 @@
     <meta charset="UTF-8">
     <title>Formulario de Propietario</title>
     <link rel="stylesheet" href="/css/propietario-form.css">
+    <script src="/JavaScript/sidebar.js" defer></script>
+
+    <!-- Font Awesome -->
+    <link
+        rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+    />
 </head>
 <body>
-    <div class="container">
-        <h1 th:text="${isEdit} ? 'Editar Propietario' : 'Nuevo Propietario'">Formulario de Propietario</h1>
-        <form th:action="@{${isEdit} ? '/propietarios/editar/' + ${propietario.cedula} : '/propietarios/nuevo'}" th:object="${propietario}" method="post">
+    <img
+    src="/images/barrasola.png"
+    alt="Barra Decorativa"
+    class="barra-decorativa"
+  />
+  <img
+    src="/images/footer.png"
+    alt="Footer Decorativo"
+    class="footer-decorativa"
+  />
+    <div class="sidebar close">
+        <div class="logo">
+            <img
+                src="/images/doggin logos/DOGIN VARIACIONES DE COLOR-11.png"
+                alt="Logo Dogin"
+                class="logo-img"
+            />
+            <img
+                src="/images/doggin logos/DOGIN VARIACIONES DE COLOR-07.png"
+                alt="Nombre Dogin"
+                class="logo-name"
+            />
+        </div>
 
-            <!-- Aquí ya no es necesario usar el ID en el campo del formulario, solo para las rutas -->
-            <label for="cedula">Cédula:</label>
-            <input type="text" id="cedula" th:field="*{cedula}" />
+        <ul class="nav-list">
+            <li>
+                <a href="#panel" onclick="showSection('panel')">
+                    <i class="fab fa-microsoft"></i>
+                    <span class="link-name">Panel</span>
+                </a>
+            </li>
 
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" th:field="*{nombre}" />
+            <li>
+                <a href="#historial" onclick="showSection('historial')">
+                    <i class="fa-solid fa-plus"></i>
+                    <span class="link-name">Agregar Macosta</span>
+                </a>
+            </li>
 
-            <label for="correo">Correo:</label>
-            <input type="text" id="correo" th:field="*{correo}" />
+            <li>
+                <a href="#historial" onclick="showSection('historial')">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span class="link-name">Agregar Propietario</span>
+                </a>
+            </li>
+            <li>
+                <a href="#historial" onclick="showSection('historial')">
+                    <i class="fa-duotone fa-solid fa-suitcase-medical"></i>
+                    <span class="link-name">Asignar Tratamiento</span>
+                </a>
+            </li>
 
-            <label for="celular">Celular:</label>
-            <input type="text" id="celular" th:field="*{celular}" />
+            <li>
+                <a href="#historial" onclick="showSection('historial')">
+                    <i class="fas fa-bookmark"></i>
+                    <span class="link-name">Ver Historial</span>
+                </a>
+            </li>
 
-            <label for="contrasena">Contraseña:</label>
-            <input type="text" id="contrasena" th:field="*{contrasena}" />
+            <li>
+                <a href="#mis-mascotas" onclick="showSection('mis-mascotas')">
+                    <i class="fa-sharp fa-solid fa-shield-dog" style="color: #ffffff"></i>
+                    <span class="link-name">Listado de Mascotas</span>
+                </a>
+            </li>
 
-            <button type="submit" th:text="${isEdit} ? 'Actualizar' : 'Crear'">Enviar</button>
-        </form>
-        <a href="/propietarios">Volver a la lista</a>
+            <li>
+                <a href="#mis-mascotas" onclick="showSection('mis-mascotas')">
+                    <i class="fa-solid fa-list-ul"></i>
+                    <span class="link-name">Listado de Propietarios</span>
+                </a>
+            </li>
+
+            <li>
+                <div class="profile-details">
+                    <div class="profile-content">
+                        <img src="/images/user.jpg" alt="Imagen del Usuario" />
+                    </div>
+
+                    <div class="name-job">
+                        <div class="name" th:text="${primerNombre}">Nombre del Usuario</div>
+                        <div class="job">Veterinario</div>
+                    </div>
+                    <a href="/logout"><i class="fas fa-right-to-bracket"></i></a>
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <div class="home-section">
+        <div class="home-content">
+            <i class="fas fa-bars"></i>
+            <span class="text">Menu</span>
+        </div>
+        
+        <!-- Sección de Panel -->
+        <section id="panel" class="content-section">
+            <h2>Panel</h2>
+            <p>Aquí va el contenido del panel principal...</p>
+        </section>
+
+        <!-- Sección de Historial -->
+        <section id="historial" class="content-section" style="display: none;">
+            <h2>Historial</h2>
+            <p>Aquí va el contenido del historial...</p>
+        </section>
+
+        <!-- Sección de Mis Mascotas -->
+        <section id="mis-mascotas" class="content-section" style="display: none;">
+            <h2>Mis Mascotas</h2>
+            <p>Aquí va el contenido de mis mascotas...</p>
+        </section>
+
+        <img src="/images/modificarIcono.png" alt="icono" class="iconoModificar"/>
+
+        <header id="header">
+            <h1 class="form-title">EDITAR PROPIETARIO</h1>
+            <img src="/images/edit.png" alt="icono" class="iconoEdit"/>
+        </header>
+        <main>
+            <div class="container">
+                <div class="form_area">
+                    <p class="title">DATOS DEl PROPIETARIO</p>
+                    <form th:action="@{${isEdit} ? '/propietarios/editar/' + ${propietario.cedula} : '/propietarios/nuevo'}" th:object="${propietario}" method="post">
+                        <div class="form_group">
+                            <label class="sub_title" for="name">Cedula </label>
+                            <input class="form_style" type="text" id="cedula" th:field="*{cedula}" />
+                        </div>
+                        <div class="form_group">
+                            <label class="sub_title" for="name">Nombre</label>
+                            <input class="form_style" type="text" id="nombre" th:field="*{nombre}" />
+                        </div>
+                        <div class="form_group">
+                            <label class="sub_title" for="name">Correo</label>
+                            <input class="form_style" type="text" id="correo" th:field="*{correo}" />
+                        </div>
+                        <div class="form_group">
+                            <label class="sub_title" for="name">Celular</label>
+                            <input class="form_style" type="text" id="celular" th:field="*{celular}" />
+                        </div>
+                        <div class="form_group">
+                            <label class="sub_title" for="name">Contraseña</label>
+                            <input class="form_style" type="text" id="contrasena" th:field="*{contrasena}" />
+                        </div>
+
+                        <div>
+                            <button type="submit" class="btn" th:text="${isEdit} ? 'Guardar' : 'Crear'"></button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </main>
     </div>
 </body>
 </html>
