@@ -4,8 +4,8 @@ import com.example.demo.model.Pet;
 import com.example.demo.model.Propietario;
 import com.example.demo.service.PetService;
 import com.example.demo.service.PropietarioService;
-import org.slf4j.LoggerFactory;
 import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -60,6 +60,7 @@ public class PetController {
         model.addAttribute("pet", new Pet());
         List<Propietario> propietarios = propietarioService.findAll();
         model.addAttribute("propietarios", propietarios);
+        model.addAttribute("isEdit", false); // Añadir esta línea para configurar isEdit
         return "pet-form";
     }
 
@@ -90,6 +91,7 @@ public class PetController {
             model.addAttribute("pet", pet.get());
             List<Propietario> propietarios = propietarioService.findAll();
             model.addAttribute("propietarios", propietarios);
+            model.addAttribute("isEdit", true); // Añadir esta línea para configurar isEdit
             logger.info("Displaying edit form for pet: {}", pet.get());
             return "pet-form";
         } else {
@@ -130,7 +132,6 @@ public class PetController {
             return "redirect:/pets";
         }
     }
-
 
     @GetMapping("/delete/{id}")
     public String deletePet(@PathVariable int id, Model model) {

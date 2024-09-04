@@ -129,7 +129,7 @@
         <img src="/images/modificarIcono.png" alt="icono" class="iconoModificar"/>
 
         <header id="header">
-            <h1 class="form-title">EDITAR PROPIETARIO</h1>
+            <h1 class ="form-title" th:text="${isEdit} ? 'EDITAR PROPIETARIO' : 'NUEVO PROPIETARIO'"></h1>
             <img src="/images/edit.png" alt="icono" class="iconoEdit"/>
         </header>
         <main>

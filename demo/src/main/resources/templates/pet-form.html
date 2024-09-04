@@ -130,14 +130,14 @@
         <img src="/images/modificarIcono.png" alt="icono" class="iconoModificar"/>
 
         <header id="header">
-            <h1 class="form-title">EDITAR MASCOTA</h1>
+            <h1  class="form-title" th:text="${isEdit} ? 'EDITAR MASCOTA' : 'NUEVA MASCOTA'"></h1>
             <img src="/images/edit.png" alt="icono" class="iconoEdit"/>
         </header>
         <main>
             <div class="container">
                 <div class="form_area">
                     <p class="title">DATOS DE LA MASCOTA</p>
-                    <form th:action="@{/pets}" th:object="${pet}" method="post">
+                    <form th:action="@{${isEdit} ? '/pets/edit/' + ${pet.id} : '/pets/new'}" th:object="${pet}" method="post">
                         <div class="form_group">
                             <label class="sub_title" for="name">Nombre </label>
                             <input placeholder="Ingresa el nombre de tu mascota" class="form_style" type="text" id="name" th:field="*{name}">
