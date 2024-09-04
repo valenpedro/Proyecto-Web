@@ -157,15 +157,18 @@ tbody tr.hide td img {
 
 .table__body .status.activo {
     text-align: center;
-    background-color: #86e49d;
-    color: #006b21;
+    background-color: #7FC7D9;
+    color: #black;
+    font-weight: bold; 
 }
 
 .table__body .status.inactivo {
     text-align: center;
-    background-color: #d893a3;
-    color: #b30021;
+    background-color: #7FC7D9;
+    color: #black;
+    font-weight: bold;
 }
+
 
 
 @media (max-width: 1000px) {
