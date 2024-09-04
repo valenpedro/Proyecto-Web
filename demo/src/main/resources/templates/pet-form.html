@@ -7,8 +7,8 @@
     <link rel="stylesheet" href="/css/petform.css">
     <script src="/JavaScript/sidebar.js" defer></script>
 
-        <!-- Font Awesome -->
-        <link
+    <!-- Font Awesome -->
+    <link
         rel="stylesheet"
         href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
     />
@@ -94,60 +94,65 @@
             <p>Aquí va el contenido del historial...</p>
         </section>
 
+        <!-- Sección de Mis Mascotas -->
+        <section id="mis-mascotas" class="content-section" style="display: none;">
+            <h2>Mis Mascotas</h2>
+            <p>Aquí va el contenido de mis mascotas...</p>
+        </section>
 
+        <img src="/images/modificarIcono.png" alt="icono" class="iconoModificar"/>
 
-  <img src="/images/modificarIcono.png" alt="icono" class="iconoModificar"/>
-
-    <header id="header">
-        <h1 class="form-title">EDITAR MASCOTA</h1>
-        <img src="/images/edit.png" alt="icono" class="iconoEdit"/>
-    </header>
-    <main>
-<div class="container">
-    <div class="form_area">
-        <p class="title">DATOS DE LA MASCOTA</p>
-        <form th:action="@{/pets}" th:object="${pet}" method="post">
-            <div class="form_group">
-                <label class="sub_title" for="name">Nombre </label>
-                <input placeholder="Ingresa el nombre de tu mascota" class="form_style" type="text" id="name" th:field="*{name}">
+        <header id="header">
+            <h1 class="form-title">EDITAR MASCOTA</h1>
+            <img src="/images/edit.png" alt="icono" class="iconoEdit"/>
+        </header>
+        <main>
+            <div class="container">
+                <div class="form_area">
+                    <p class="title">DATOS DE LA MASCOTA</p>
+                    <form th:action="@{/pets}" th:object="${pet}" method="post">
+                        <div class="form_group">
+                            <label class="sub_title" for="name">Nombre </label>
+                            <input placeholder="Ingresa el nombre de tu mascota" class="form_style" type="text" id="name" th:field="*{name}">
+                        </div>
+                        <div class="form_group">
+                            <label class="sub_title" for="breed">Raza</label>
+                            <input placeholder="Ingresa la raza de tu mascota" class="form_style" type="text" id="breed" th:field="*{breed}">
+                        </div>
+                        <div class="form_group">
+                            <label class="sub_title" for="age">Edad</label>
+                            <input placeholder="Ingresa la edad de tu mascota" class="form_style" type="number" id="age" th:field="*{age}">
+                        </div>
+                        <div class="form_group">
+                            <label class="sub_title" for="weight">Peso</label>
+                            <input placeholder="Ingresa el peso de tu mascota" class="form_style" type="number" id="weight" th:field="*{weight}">
+                        </div>
+                        <div class="form_group">
+                            <label class="sub_title" for="illness">Enfermedad</label>
+                            <input placeholder="Ingresa si tu mascota tiene alguna enfermedad" class="form_style" type="text" id="illness" th:field="*{illness}">
+                        </div>
+                        <div class="form_group">
+                            <label class="sub_title" for="photoUrl">Foto (URL)</label>
+                            <input placeholder="Ingresa la URL de la foto de tu mascota" class="form_style" type="text" id="photoUrl" th:field="*{photoUrl}">
+                        </div>
+                        <div class="form_group">
+                            <label class="sub_title" for="status">Estado</label>
+                            <input placeholder="Ingresa el estado de tu mascota" class="form_style" type="text" id="status" th:field="*{status}">
+                        </div>
+                        <div class="form_group">
+                            <label class="sub_title" for="owner">Propietario</label>
+                            <select id="owner" class="form_style" th:field="*{propietario.cedula}" required>
+                                <option value="" disabled selected>Seleccione un propietario</option>
+                                <option th:each="propietario : ${propietarios}" th:value="${propietario.cedula}" th:text="${propietario.nombre}"></option>
+                            </select>
+                        </div>
+                        <div>
+                            <button type ="submit" class="btn">GUARDAR</button>
+                        </div>
+                    </form>
+                </div>
             </div>
-            <div class="form_group">
-                <label class="sub_title" for="breed">Raza</label>
-                <input placeholder="Enter your email" class="form_style" type="text" id="breed" th:field="*{breed}">
-            </div>
-            <div class="form_group">
-                <label class="sub_title" for="age">Edad</label>
-                <input placeholder="Enter your password" class="form_style" type="number" id="age" th:field="*{age}">
-            </div>
-            <div class="form_group">
-                <label class="sub_title" for="weight">Peso</label>
-                <input placeholder="Enter your password" class="form_style" type="number" id="weight" th:field="*{weight}">
-            </div>
-            <div class="form_group">
-                <label class="sub_title" for="illness">Enfermedad</label>
-                <input placeholder="Enter your password" class="form_style" type="text" id="illness" th:field="*{illness}">
-            </div>
-            <div class="form_group">
-                <label class="sub_title" for="photoUrl">Foto (URL)</label>
-                <input placeholder="Enter your password" class="form_style" type="text" id="photoUrl" th:field="*{photoUrl}">
-            </div>
-            <div class="form_group">
-                <label class="sub_title" for="status">Estado</label>
-                <input placeholder="Enter your password" class="form_style" type="text" id="status" th:field="*{status}">
-            </div>
-            <div class="form_group">
-                <label class="sub_title" for="owner">Propietario</label>
-                <select id="owner" class="form_style" th:field="*{propietario.cedula}" required>
-                    <option value="" disabled selected>Seleccione un propietario</option>
-                    <option th:each="propietario : ${propietarios}" th:value="${propietario.cedula}" th:text="${propietario.nombre}"></option>
-                </select>
-            </div>
-            <div>
-                <button type ="submit" class="btn">GUARDAR</button>
-                </div><a class="link" href="">
-        
-    </a></form></div><a class="link" href="">
-</a></div>
-    </main>
+        </main>
+    </div>
 </body>
 </html>
