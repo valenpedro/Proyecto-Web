@@ -37,7 +37,7 @@ main.table {
   color: #0f1035;
   text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   position: fixed; /* Cambia a 'fixed' para mantener el título en una posición fija */
-  top: 5px; /* Ajusta la posición vertical desde la parte superior de la ventana */
+  top: 30px; /* Ajusta la posición vertical desde la parte superior de la ventana */
   left: calc(80% - 300px); /* Ajusta la posición horizontal, en este caso para que quede a la derecha */
   /* Puedes ajustar 'left' según tus necesidades */
   z-index: 20; /* Asegura que el título esté por encima de otros elementos */
@@ -282,7 +282,7 @@ thead th.active,tbody td.active {
 }
 
 
-.iconoModificar {
+.iconoLista {
     position: fixed; /* Posiciona la imagen de manera absoluta */
     top: 30px; /* Ajusta según donde quieras que se muestre */
     left: 1000px; /* Ajusta según donde quieras que se muestre */
