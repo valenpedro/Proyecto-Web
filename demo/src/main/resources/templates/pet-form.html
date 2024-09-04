@@ -48,6 +48,26 @@
 
             <li>
                 <a href="#historial" onclick="showSection('historial')">
+                    <i class="fa-solid fa-plus"></i>
+                    <span class="link-name">Agregar Macosta</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#historial" onclick="showSection('historial')">
+                    <i class="fa-solid fa-user-plus"></i>
+                    <span class="link-name">Agregar Propietario</span>
+                </a>
+            </li>
+            <li>
+                <a href="#historial" onclick="showSection('historial')">
+                    <i class="fa-duotone fa-solid fa-suitcase-medical"></i>
+                    <span class="link-name">Asignar Tratamiento</span>
+                </a>
+            </li>
+
+            <li>
+                <a href="#historial" onclick="showSection('historial')">
                     <i class="fas fa-bookmark"></i>
                     <span class="link-name">Ver Historial</span>
                 </a>
@@ -56,7 +76,7 @@
             <li>
                 <a href="#mis-mascotas" onclick="showSection('mis-mascotas')">
                     <i class="fa-sharp fa-solid fa-shield-dog" style="color: #ffffff"></i>
-                    <span class="link-name">Mis Mascotas</span>
+                    <span class="link-name">Listado de Mascotas</span>
                 </a>
             </li>
 
@@ -68,7 +88,7 @@
 
                     <div class="name-job">
                         <div class="name" th:text="${primerNombre}">Nombre del Usuario</div>
-                        <div class="job">Dueño de Mascota</div>
+                        <div class="job">Veterinario</div>
                     </div>
                     <a href="/logout"><i class="fas fa-right-to-bracket"></i></a>
                 </div>
