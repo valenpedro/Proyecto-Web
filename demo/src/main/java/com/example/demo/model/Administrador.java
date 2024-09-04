@@ -14,16 +14,17 @@ public class Administrador {
     private String cedula;
     private String nombre;
     private String correo;
+    private String contrasena;
 
     // Constructor vacío
-    public Administrador() {
-    }
+    public Administrador() {}
 
     // Constructor con todos los campos
-    public Administrador(String cedula, String nombre, String correo) {
+    public Administrador(String cedula, String nombre, String correo, String contrasena) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.correo = correo;
+        this.contrasena = contrasena;
     }
 
     // Getters y Setters
@@ -57,5 +58,13 @@ public class Administrador {
 
     public void setCorreo(String correo) {
         this.correo = correo;
+    }
+
+    public String getContrasena() {
+        return contrasena;
+    }
+
+    public void setContrasena(String contrasena) {
+        this.contrasena = contrasena;
     }
 }

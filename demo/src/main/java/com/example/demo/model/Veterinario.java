@@ -14,6 +14,7 @@ public class Veterinario {
     private String especialidad;
     private int numAtenciones;
     private String contrasena;
+    private String correo; // Añadimos el campo correo
 
     @OneToMany(mappedBy = "veterinario", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Tratamiento> tratamientos = new ArrayList<>();
@@ -22,12 +23,13 @@ public class Veterinario {
     public Veterinario() {}
 
     // Constructor con campos
-    public Veterinario(String cedula, String nombre, String especialidad, int numAtenciones, String contrasena) {
+    public Veterinario(String cedula, String nombre, String especialidad, int numAtenciones, String contrasena, String correo) {
         this.cedula = cedula;
         this.nombre = nombre;
         this.especialidad = especialidad;
         this.numAtenciones = numAtenciones;
         this.contrasena = contrasena;
+        this.correo = correo;
     }
 
     // Getters y Setters
@@ -69,6 +71,14 @@ public class Veterinario {
 
     public void setContrasena(String contrasena) {
         this.contrasena = contrasena;
+    }
+
+    public String getCorreo() {
+        return correo;
+    }
+
+    public void setCorreo(String correo) {
+        this.correo = correo;
     }
 
     public List<Tratamiento> getTratamientos() {

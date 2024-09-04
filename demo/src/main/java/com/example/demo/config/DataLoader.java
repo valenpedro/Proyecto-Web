@@ -29,11 +29,11 @@ public class DataLoader {
                 long cedula;
                 do {
                     cedula = 1000000000L + (long) (random.nextDouble() * 9000000000L);
-                } while (cedulasGeneradas.contains(cedula)); // Asegura que la cédula sea única
+                } while (cedulasGeneradas.contains(cedula));
                 cedulasGeneradas.add(cedula);
 
                 Propietario propietario = new Propietario(
-                        String.valueOf(cedula), // Convertir a String
+                        String.valueOf(cedula),
                         "Propietario " + i,
                         "email" + i + "@example.com",
                         "123456789" + i,
@@ -56,12 +56,12 @@ public class DataLoader {
             };
 
             for (Propietario propietario : propietarios) {
-                for (int j = 0; j < 2; j++) { // 2 mascotas por propietario
+                for (int j = 0; j < 2; j++) {
                     Pet pet = new Pet(
                             nombres[random.nextInt(nombres.length)],
                             razas[random.nextInt(razas.length)],
-                            random.nextInt(15), // Edad entre 0 y 14
-                            random.nextFloat() * 30, // Peso entre 0 y 30 kg
+                            random.nextInt(15),
+                            random.nextFloat() * 30,
                             enfermedades[random.nextInt(enfermedades.length)],
                             urlsFotos[random.nextInt(urlsFotos.length)],
                             estados[random.nextInt(estados.length)],
@@ -77,29 +77,30 @@ public class DataLoader {
                 long cedula;
                 do {
                     cedula = 1000000000L + (long) (random.nextDouble() * 9000000000L);
-                } while (cedulasGeneradas.contains(cedula)); // Asegura que la cédula sea única
+                } while (cedulasGeneradas.contains(cedula));
                 cedulasGeneradas.add(cedula);
 
                 Veterinario veterinario = new Veterinario(
                         String.valueOf(cedula),
                         "Veterinario " + i,
                         "Especialidad " + i,
-                        random.nextInt(100), // Número de atenciones
-                        "password" + i
+                        random.nextInt(100),
+                        "password" + i,
+                        "veterinario" + i + "@example.com"
                 );
                 veterinarios.add(veterinario);
             }
             veterinarioRepository.saveAll(veterinarios);
 
             // Generar 20 medicamentos
-            String[] nombresMedicamentos = {"Medicamento A", "Medicamento B", "Medicamento C", "Medicamento D", "Medicamento E"};
+            String[] nombresMedicamentos = {"Medicamento A", "Medicamento B", "Medicamento C", "Medicamento D"};
             for (int i = 1; i <= 20; i++) {
                 Medicamento medicamento = new Medicamento(
                         nombresMedicamentos[random.nextInt(nombresMedicamentos.length)],
-                        random.nextFloat() * 50, // Precio de compra
-                        random.nextFloat() * 100, // Precio de venta
-                        random.nextInt(100), // Unidades disponibles
-                        random.nextInt(50) // Unidades vendidas
+                        random.nextFloat() * 50,
+                        random.nextFloat() * 100,
+                        random.nextInt(100),
+                        random.nextInt(50)
                 );
                 medicamentos.add(medicamento);
             }
@@ -122,7 +123,8 @@ public class DataLoader {
                 Administrador administrador = new Administrador(
                         "admin" + i,
                         "Administrador " + i,
-                        "admin" + i + "@example.com"
+                        "admin" + i + "@example.com",
+                        "password" + i
                 );
                 administradorRepository.save(administrador);
             }
