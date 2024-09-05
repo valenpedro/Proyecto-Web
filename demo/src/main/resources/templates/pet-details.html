@@ -26,7 +26,13 @@
                         <p class="card-text">Peso: <span th:text="${pet.weight}"></span> kg</p>
                         <p class="card-text">Enfermedad: <span th:text="${pet.illness}"></span></p>
                         <p class="card-text">Estado: <span th:text="${pet.status}"></span></p>
-                        <p class="card-text">Propietario: <span th:text="${pet.propietario.nombre}"></span></p>
+
+                        <!-- Aquí agregamos los detalles del propietario -->
+                        <h5 class="card-title">Detalles del Propietario</h5>
+                        <p class="card-text">Nombre del Propietario: <span th:text="${propietario.nombre}"></span></p>
+                        <p class="card-text">Cédula: <span th:text="${propietario.cedula}"></span></p>
+                        <p class="card-text">Correo: <span th:text="${propietario.correo}"></span></p>
+                        <p class="card-text">Celular: <span th:text="${propietario.celular}"></span></p>
                     </div>
                     <div class="image-container">
                         <img th:src="${pet.photoUrl}" alt="Foto de Mascota" class="card-img-top">

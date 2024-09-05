@@ -66,30 +66,27 @@ public class PetController {
             if (usuarioLogueado instanceof Veterinario) {
                 Veterinario veterinario = (Veterinario) usuarioLogueado;
                 model.addAttribute("primerNombre", veterinario.getNombre().split(" ")[0]);
-                model.addAttribute("pet", pet);
-                model.addAttribute("propietario", pet.getPropietario());
-                return "pet-details";
+            }
 
             // Verifica si el usuario logueado es un propietario
-            } else if (usuarioLogueado instanceof Propietario) {
+            else if (usuarioLogueado instanceof Propietario) {
                 Propietario propietario = (Propietario) usuarioLogueado;
-
-                // Verifica que el propietario sea el dueño de la mascota
-                if (esPropietarioDeLaMascota(propietario, pet)) {
-                    model.addAttribute("primerNombre", propietario.getNombre().split(" ")[0]);
-                    model.addAttribute("pet", pet);
-                    model.addAttribute("propietario", pet.getPropietario());
-                    return "pet-details";
-                } else {
-                    return "redirect:/login"; // Redirige si no es el dueño de la mascota
+                if (!esPropietarioDeLaMascota(propietario, pet)) {
+                    return "redirect:/login";
                 }
-            } else {
-                return "redirect:/login"; // Redirige si el usuario logueado no es ni veterinario ni propietario
+                model.addAttribute("primerNombre", propietario.getNombre().split(" ")[0]);
             }
+
+            // Añade la mascota y su propietario al modelo
+            model.addAttribute("pet", pet);
+            model.addAttribute("propietario", pet.getPropietario());
+
+            return "pet-details";
         } else {
             return "redirect:/pets"; // Redirige si la mascota no se encuentra
         }
     }
+
 
 
     @GetMapping("/new")
