@@ -32,26 +32,35 @@ public class PropietarioController {
         if (!isVeterinario(session)) {
             return "redirect:/login";
         }
+        Veterinario veterinario = (Veterinario) session.getAttribute("usuarioLogueado");
+        model.addAttribute("primerNombre", veterinario.getNombre().split(" ")[0]); // Agrega el primer nombre
+
         List<Propietario> propietarios = propietarioService.findAll();
         model.addAttribute("propietarios", propietarios);
         return "propietario-list";
     }
+
 
     @GetMapping("/nuevo")
     public String showCreateForm(Model model, HttpSession session) {
         if (!isVeterinario(session)) {
             return "redirect:/login";
         }
+        Veterinario veterinario = (Veterinario) session.getAttribute("usuarioLogueado");
+        model.addAttribute("primerNombre", veterinario.getNombre().split(" ")[0]); // Agrega el primer nombre
+
         model.addAttribute("propietario", new Propietario());
         model.addAttribute("isEdit", false);
         return "propietario-form";
     }
+
 
     @PostMapping("/nuevo")
     public String createPropietario(@ModelAttribute Propietario propietario, HttpSession session) {
         if (!isVeterinario(session)) {
             return "redirect:/login";
         }
+        
         propietarioService.save(propietario);
         return "redirect:/propietarios";
     }
@@ -61,6 +70,9 @@ public class PropietarioController {
         if (!isVeterinario(session)) {
             return "redirect:/login";
         }
+        Veterinario veterinario = (Veterinario) session.getAttribute("usuarioLogueado");
+        model.addAttribute("primerNombre", veterinario.getNombre().split(" ")[0]); // Agrega el primer nombre
+
         Optional<Propietario> propietario = propietarioService.findByCedula(cedula);
         if (propietario.isPresent()) {
             model.addAttribute("propietario", propietario.get());
@@ -70,6 +82,7 @@ public class PropietarioController {
             return "redirect:/propietarios";
         }
     }
+
 
     @PostMapping("/editar/{cedula}")
     public String updatePropietario(@PathVariable String cedula, @ModelAttribute Propietario propietarioDetails, HttpSession session) {
@@ -87,6 +100,7 @@ public class PropietarioController {
         }
         return "redirect:/propietarios";
     }
+
 
     @GetMapping("/eliminar/{cedula}")
     public String deletePropietario(@PathVariable String cedula, HttpSession session) {

@@ -53,6 +53,9 @@ public class PetController {
             return "redirect:/login";
         }
         logger.info("Request to view all pets");
+        Veterinario veterinario = (Veterinario) session.getAttribute("usuarioLogueado");
+        model.addAttribute("primerNombre", veterinario.getNombre().split(" ")[0]); // Agrega el primer nombre
+    
         List<Pet> pets = petService.getAllPets();
         model.addAttribute("pets", pets);
         return "pets";
@@ -65,33 +68,44 @@ public class PetController {
             Pet pet = petOpt.get();
             Object usuarioLogueado = session.getAttribute("usuarioLogueado");
 
+            // Aseguramos que el usuario logueado sea un veterinario o el propietario de la mascota
             if (isVeterinario(session) || (isPropietario(session) && esPropietarioDeLaMascota((Propietario) usuarioLogueado, pet))) {
-                model.addAttribute("pet", pet);
-                model.addAttribute("propietario", pet.getPropietario());
-                logger.info("Displaying details for pet: {}", pet);
-                return "pet-details";
+                Veterinario veterinario = (Veterinario) session.getAttribute("usuarioLogueado");
+                model.addAttribute("primerNombre", veterinario.getNombre().split(" ")[0]); // Agregamos el primer nombre del veterinario
+
+                model.addAttribute("pet", pet); // Información de la mascota
+                model.addAttribute("propietario", pet.getPropietario()); // Información del propietario
+
+                // Aquí puedes agregar cualquier otro dato del propietario si es necesario, como su nombre, teléfono, etc.
+                logger.info("Displaying details for pet: {} and its owner: {}", pet, pet.getPropietario());
+                
+                return "pet-details"; // Retorna la vista que mostrará los detalles de la mascota y del propietario
             } else {
                 logger.warn("User is not authorized to view this pet's details");
-                return "redirect:/login";
+                return "redirect:/login"; // Redirige a login si no está autorizado
             }
         } else {
             logger.warn("Pet with id: {} not found", id);
-            return "redirect:/pets";
+            return "redirect:/pets"; // Redirige si la mascota no se encuentra
         }
     }
+
 
     @GetMapping("/new")
     public String showCreatePetForm(Model model, HttpSession session) {
         if (!isVeterinario(session)) {
             return "redirect:/login";
         }
-        logger.info("Request to show form to create a new pet");
+        Veterinario veterinario = (Veterinario) session.getAttribute("usuarioLogueado");
+        model.addAttribute("primerNombre", veterinario.getNombre().split(" ")[0]); // Agrega el primer nombre
+
         model.addAttribute("pet", new Pet());
         List<Propietario> propietarios = propietarioService.findAll();
         model.addAttribute("propietarios", propietarios);
-        model.addAttribute("isEdit", false); // Añadir esta línea para configurar isEdit
+        model.addAttribute("isEdit", false);
         return "pet-form";
     }
+
 
     @PostMapping
     public String savePet(@ModelAttribute Pet pet, Model model, HttpSession session) {
@@ -119,7 +133,9 @@ public class PetController {
         if (!isVeterinario(session)) {
             return "redirect:/login";
         }
-        logger.info("Request to show form to edit pet with id: {}", id);
+        Veterinario veterinario = (Veterinario) session.getAttribute("usuarioLogueado");
+        model.addAttribute("primerNombre", veterinario.getNombre().split(" ")[0]); // Agrega el primer nombre
+
         Optional<Pet> pet = petService.getPetById(id);
         if (pet.isPresent()) {
             model.addAttribute("pet", pet.get());
@@ -128,10 +144,10 @@ public class PetController {
             model.addAttribute("isEdit", true);
             return "pet-form";
         } else {
-            logger.warn("Pet with id: {} not found, cannot edit", id);
             return "redirect:/pets";
         }
     }
+
 
     @PostMapping("/edit/{id}")
     public String updatePet(@PathVariable int id, @ModelAttribute Pet petDetails, Model model, HttpSession session) {
