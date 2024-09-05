@@ -290,6 +290,15 @@ thead th.active,tbody td.active {
     height: auto; /* Mantén la proporción de la imagen */
 }
 
+.casita {
+  position: fixed; /* Posiciona la imagen de manera absoluta */
+  top: -50px; /* Ajusta según donde quieras que se muestre */
+  left: 850px; /* Ajusta según donde quieras que se muestre */
+  z-index: 20; /* Asegura que la imagen esté por encima de la barra decorativa */
+  width: 500px; /* Ajusta el tamaño según sea necesario */
+  height: auto; /* Mantén la proporción de la imagen */
+}
+
 .iconoEdit{
     position: fixed; /* Posiciona la imagen de manera absoluta */
     top: 250px; /* Ajusta según donde quieras que se muestre */
