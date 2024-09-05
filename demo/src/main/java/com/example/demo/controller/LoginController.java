@@ -69,7 +69,7 @@ public class LoginController {
                     Veterinario veterinario = veterinarioOpt.get();
                     if (veterinario.getContrasena().equals(contrasena)) {
                         session.setAttribute("usuarioLogueado", veterinario);
-                        return "redirect:/panel_veterinario";
+                        return "redirect:/panelveterinario";
                     } else {
                         model.addAttribute("error", "Contraseña incorrecta");
                         return "login";
@@ -115,13 +115,13 @@ public class LoginController {
         return "panel_propietario";
     }
 
-    @GetMapping("/panel_veterinario")
+    @GetMapping("/panelveterinario")
     public String panelVeterinario(Model model, HttpSession session) {
         Veterinario veterinario = (Veterinario) session.getAttribute("usuarioLogueado");
         if (veterinario == null) {
             return "redirect:/login";
         }
-        return "panel_veterinario";
+        return "panelveterinario";
     }
 
     @GetMapping("/panel_administrador")

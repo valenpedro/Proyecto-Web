@@ -1,7 +1,9 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Propietario;
+import com.example.demo.model.Veterinario;
 import com.example.demo.service.PropietarioService;
+import jakarta.servlet.http.HttpSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,28 +23,44 @@ public class PropietarioController {
         this.propietarioService = propietarioService;
     }
 
+    private boolean isVeterinario(HttpSession session) {
+        return session.getAttribute("usuarioLogueado") instanceof Veterinario;
+    }
+
     @GetMapping
-    public String getAllPropietarios(Model model) {
+    public String getAllPropietarios(Model model, HttpSession session) {
+        if (!isVeterinario(session)) {
+            return "redirect:/login";
+        }
         List<Propietario> propietarios = propietarioService.findAll();
         model.addAttribute("propietarios", propietarios);
         return "propietario-list";
     }
 
     @GetMapping("/nuevo")
-    public String showCreateForm(Model model) {
+    public String showCreateForm(Model model, HttpSession session) {
+        if (!isVeterinario(session)) {
+            return "redirect:/login";
+        }
         model.addAttribute("propietario", new Propietario());
         model.addAttribute("isEdit", false);
         return "propietario-form";
     }
 
     @PostMapping("/nuevo")
-    public String createPropietario(@ModelAttribute Propietario propietario) {
+    public String createPropietario(@ModelAttribute Propietario propietario, HttpSession session) {
+        if (!isVeterinario(session)) {
+            return "redirect:/login";
+        }
         propietarioService.save(propietario);
         return "redirect:/propietarios";
     }
 
     @GetMapping("/editar/{cedula}")
-    public String showEditForm(@PathVariable String cedula, Model model) {
+    public String showEditForm(@PathVariable String cedula, Model model, HttpSession session) {
+        if (!isVeterinario(session)) {
+            return "redirect:/login";
+        }
         Optional<Propietario> propietario = propietarioService.findByCedula(cedula);
         if (propietario.isPresent()) {
             model.addAttribute("propietario", propietario.get());
@@ -54,7 +72,10 @@ public class PropietarioController {
     }
 
     @PostMapping("/editar/{cedula}")
-    public String updatePropietario(@PathVariable String cedula, @ModelAttribute Propietario propietarioDetails) {
+    public String updatePropietario(@PathVariable String cedula, @ModelAttribute Propietario propietarioDetails, HttpSession session) {
+        if (!isVeterinario(session)) {
+            return "redirect:/login";
+        }
         Optional<Propietario> propietario = propietarioService.findByCedula(cedula);
         if (propietario.isPresent()) {
             Propietario updatedPropietario = propietario.get();
@@ -68,7 +89,10 @@ public class PropietarioController {
     }
 
     @GetMapping("/eliminar/{cedula}")
-    public String deletePropietario(@PathVariable String cedula) {
+    public String deletePropietario(@PathVariable String cedula, HttpSession session) {
+        if (!isVeterinario(session)) {
+            return "redirect:/login";
+        }
         propietarioService.deleteByCedula(cedula);
         return "redirect:/propietarios";
     }

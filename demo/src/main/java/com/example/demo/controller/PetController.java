@@ -2,8 +2,10 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Pet;
 import com.example.demo.model.Propietario;
+import com.example.demo.model.Veterinario;
 import com.example.demo.service.PetService;
 import com.example.demo.service.PropietarioService;
+import jakarta.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,8 +32,26 @@ public class PetController {
         logger.info("PetController initialized");
     }
 
+    // Verifica si el usuario es un veterinario
+    private boolean isVeterinario(HttpSession session) {
+        return session.getAttribute("usuarioLogueado") instanceof Veterinario;
+    }
+
+    // Verifica si el usuario es un propietario
+    private boolean isPropietario(HttpSession session) {
+        return session.getAttribute("usuarioLogueado") instanceof Propietario;
+    }
+
+    // Verifica si el propietario logueado es el dueño de la mascota
+    private boolean esPropietarioDeLaMascota(Propietario propietarioLogueado, Pet pet) {
+        return propietarioLogueado != null && pet.getPropietario().getCedula().equals(propietarioLogueado.getCedula());
+    }
+
     @GetMapping
-    public String viewAllPets(Model model) {
+    public String viewAllPets(Model model, HttpSession session) {
+        if (!isVeterinario(session)) {
+            return "redirect:/login";
+        }
         logger.info("Request to view all pets");
         List<Pet> pets = petService.getAllPets();
         model.addAttribute("pets", pets);
@@ -39,15 +59,21 @@ public class PetController {
     }
 
     @GetMapping("/{id}")
-    public String viewPetDetails(@PathVariable int id, Model model) {
-        logger.info("Request to view details of pet with id: {}", id);
-        Optional<Pet> pet = petService.getPetById(id);
-        if (pet.isPresent()) {
-            model.addAttribute("pet", pet.get());
-            Propietario propietario = pet.get().getPropietario();
-            model.addAttribute("propietario", propietario);
-            logger.info("Displaying details for pet: {}", pet.get());
-            return "pet-details";
+    public String viewPetDetails(@PathVariable int id, Model model, HttpSession session) {
+        Optional<Pet> petOpt = petService.getPetById(id);
+        if (petOpt.isPresent()) {
+            Pet pet = petOpt.get();
+            Object usuarioLogueado = session.getAttribute("usuarioLogueado");
+
+            if (isVeterinario(session) || (isPropietario(session) && esPropietarioDeLaMascota((Propietario) usuarioLogueado, pet))) {
+                model.addAttribute("pet", pet);
+                model.addAttribute("propietario", pet.getPropietario());
+                logger.info("Displaying details for pet: {}", pet);
+                return "pet-details";
+            } else {
+                logger.warn("User is not authorized to view this pet's details");
+                return "redirect:/login";
+            }
         } else {
             logger.warn("Pet with id: {} not found", id);
             return "redirect:/pets";
@@ -55,7 +81,10 @@ public class PetController {
     }
 
     @GetMapping("/new")
-    public String showCreatePetForm(Model model) {
+    public String showCreatePetForm(Model model, HttpSession session) {
+        if (!isVeterinario(session)) {
+            return "redirect:/login";
+        }
         logger.info("Request to show form to create a new pet");
         model.addAttribute("pet", new Pet());
         List<Propietario> propietarios = propietarioService.findAll();
@@ -65,12 +94,14 @@ public class PetController {
     }
 
     @PostMapping
-    public String savePet(@ModelAttribute Pet pet, Model model) {
+    public String savePet(@ModelAttribute Pet pet, Model model, HttpSession session) {
+        if (!isVeterinario(session)) {
+            return "redirect:/login";
+        }
         logger.info("Request to save new pet: {}", pet);
-        
-        // Buscar propietario por cédula en lugar de por ID
+
         Optional<Propietario> propietario = propietarioService.findByCedula(pet.getPropietario().getCedula());
-        
+
         if (propietario.isPresent()) {
             pet.setPropietario(propietario.get());
             petService.savePet(pet);
@@ -84,15 +115,17 @@ public class PetController {
     }
 
     @GetMapping("/edit/{id}")
-    public String showEditPetForm(@PathVariable int id, Model model) {
+    public String showEditPetForm(@PathVariable int id, Model model, HttpSession session) {
+        if (!isVeterinario(session)) {
+            return "redirect:/login";
+        }
         logger.info("Request to show form to edit pet with id: {}", id);
         Optional<Pet> pet = petService.getPetById(id);
         if (pet.isPresent()) {
             model.addAttribute("pet", pet.get());
             List<Propietario> propietarios = propietarioService.findAll();
             model.addAttribute("propietarios", propietarios);
-            model.addAttribute("isEdit", true); // Añadir esta línea para configurar isEdit
-            logger.info("Displaying edit form for pet: {}", pet.get());
+            model.addAttribute("isEdit", true);
             return "pet-form";
         } else {
             logger.warn("Pet with id: {} not found, cannot edit", id);
@@ -101,7 +134,10 @@ public class PetController {
     }
 
     @PostMapping("/edit/{id}")
-    public String updatePet(@PathVariable int id, @ModelAttribute Pet petDetails, Model model) {
+    public String updatePet(@PathVariable int id, @ModelAttribute Pet petDetails, Model model, HttpSession session) {
+        if (!isVeterinario(session)) {
+            return "redirect:/login";
+        }
         logger.info("Request to update pet with id: {}", id);
         Optional<Pet> existingPet = petService.getPetById(id);
         if (existingPet.isPresent()) {
@@ -114,7 +150,6 @@ public class PetController {
             pet.setPhotoUrl(petDetails.getPhotoUrl());
             pet.setStatus(petDetails.getStatus());
 
-            // Buscar propietario por cédula en lugar de por ID
             Optional<Propietario> propietario = propietarioService.findByCedula(petDetails.getPropietario().getCedula());
             if (propietario.isPresent()) {
                 pet.setPropietario(propietario.get());
@@ -134,14 +169,12 @@ public class PetController {
     }
 
     @GetMapping("/delete/{id}")
-    public String deletePet(@PathVariable int id, Model model) {
-        logger.info("Request to delete pet with id: {}", id);
-        try {
-            petService.deletePetById(id);
-            logger.info("Pet with id: {} deleted successfully", id);
-        } catch (Exception e) {
-            logger.error("Failed to delete pet with id: {}", id, e);
+    public String deletePet(@PathVariable int id, HttpSession session) {
+        if (!isVeterinario(session)) {
+            return "redirect:/login";
         }
+        logger.info("Request to delete pet with id: {}", id);
+        petService.deletePetById(id);
         return "redirect:/pets";
     }
 }
