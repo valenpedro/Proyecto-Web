@@ -166,9 +166,10 @@
 
                     <!--BOTONES DE ACCIONES-->
                     <td>
-                      <a th:href="@{/propietarios/editar/{cedula}(cedula=${propietario.cedula})}" class="btn-editar">Editar</a>
-                      <a th:href="@{/propietarios/eliminar/{cedula}(cedula=${propietario.cedula})}" class="btn-eliminar">Eliminar</a>
-                    </td>
+                        <a th:href="@{/propietarios/{cedula}(cedula=${propietario.cedula})}" class="btn-detalles">Ver Detalles</a>
+                        <a th:href="@{/propietarios/editar/{cedula}(cedula=${propietario.cedula})}" class="btn-editar">Editar</a>
+                        <a th:href="@{/propietarios/eliminar/{cedula}(cedula=${propietario.cedula})}" class="btn-eliminar">Eliminar</a>
+                    </td>                    
                 </tr>
             </tbody>
         </table>
