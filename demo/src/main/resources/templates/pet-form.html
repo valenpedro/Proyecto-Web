@@ -166,8 +166,12 @@
                         </div>
                         <div class="form_group">
                             <label class="sub_title" for="status">Estado</label>
-                            <input placeholder="Ingresa el estado de tu mascota" class="form_style" type="text" id="status" th:field="*{status}">
-                        </div>
+                            <select class="form_style" id="status" th:field="*{status}" required>
+                                <option value="" disabled selected>Seleccione el estado de la mascota</option>
+                                <option value="Activo">Activo</option>
+                                <option value="Inactivo">Inactivo</option>
+                            </select>
+                        </div>                        
                         <div class="form_group">
                             <label class="sub_title" for="owner">Propietario</label>
                             <select id="owner" class="form_style" th:field="*{propietario.cedula}" required>
