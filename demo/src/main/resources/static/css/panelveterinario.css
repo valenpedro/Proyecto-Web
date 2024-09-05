@@ -357,11 +357,11 @@ body {
 
 /* Estilos para manejar la visibilidad de las secciones */
 .content-section {
-    display: none;
+  display: none; /* Oculto por defecto */
 }
 
 .content-section.active {
-    display: block;
+  display: block; /* Se muestra cuando tiene la clase 'active' */
 }
 
 @media (max-width: 400px) {
@@ -399,4 +399,50 @@ body {
 /* Cuando el sidebar está abierto */
 .sidebar.close ~ .home-section .home-content i.fa-bars {
   transform: translateX(20px); /* Ajusta este valor según sea necesario */
+}
+
+/* Bloque blanco con texto a la izquierda */
+.welcome-block {
+  position: absolute;
+  top: 20%;
+  left: 100px;
+  width: 500px;
+  background-color: white;
+  border-radius: 15px;
+  padding: 30px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+    z-index: 10;
+    transition: all 0.3s ease; /* Suaviza cualquier cambio, incluido el hover */
+}
+
+.welcome-block:hover {
+  box-shadow: 0px 12px 24px rgba(0, 0, 0, 0.3); /* Sombra más grande al hacer hover */
+  transform: translateY(-10px); /* Hace que el bloque se eleve suavemente */
+  background-color: #f0f8ff; /* Cambia ligeramente el color de fondo */
+  transition: all 0.3s ease; /* Asegura que todos los efectos de hover se animen */
+}
+
+.welcome-block p {
+  font-size: 32px;
+  color: #0f1035;
+  line-height: 1.7;
+  text-align: left;
+}
+
+/* Texto de bienvenida grande encima del veterinario */
+.text-right {
+  position: absolute;
+  top: 100px;
+  right: 100px;
+  text-align: right;
+  z-index: 10;
+}
+
+.welcome-text {
+  font-size: 40px;
+  font-weight: 900;
+  color: #0f1035;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+  line-height: 1.2;
+  letter-spacing: 1px;
 }

@@ -356,47 +356,58 @@ body {
   }
 }
 
-/* Estilo de la tabla */
-.container {
-    max-width: 90%;
-    margin: 0 auto;
-    padding: 20px;
-    background-color: #ffffff;
-    border-radius: 15px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
-    overflow-x: auto;
-}
-
 table {
     width: 100%;
     border-collapse: collapse;
     margin-bottom: 30px;
+    margin: 0;
+    padding: 0;
+    max-width: 90%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 thead th {
-    background-color: #365486;
-    color: #ffffff;
-    padding: 15px;
-    font-size: 16px;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
+  background-color: #ffffff; /* Cambia el fondo a blanco */
+  color: #0f1035; /* Cambia el color del texto a oscuro */
+  padding: 1rem;
+  font-size: 16px; /* Tamaño de fuente más pequeño */
+  text-transform: capitalize; /* Capitaliza solo la primera letra */
+  position: sticky; /* Haz que los encabezados se mantengan visibles al hacer scroll */
+  top: 0;
 }
+
 
 tbody tr {
     border-bottom: 1px solid #dddddd;
     transition: background-color 0.3s ease;
 }
 
-tbody tr:hover {
-    background-color: #f7f7f7;
+tbody tr:nth-child(even) {
+  background-color: #f7f7f7; /* Fondo gris claro para filas alternas */
 }
 
-tbody td {
-    padding: 10px 10px;
-    text-align: center;
-    font-size: 16px;
-    color: #0f1035;
+tbody tr:hover {
+  background-color: #fff6 !important; /* Efecto hover en las filas */
 }
+
+
+/* Ajusta el tamaño de las celdas de la tabla */
+tbody td {
+  padding: 1rem;
+  text-align: left; /* Alineación a la izquierda */
+  font-size: 16px;
+  color: #0f1035;
+}
+
+td img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%; /* Imagen circular */
+  margin-right: .5rem; /* Espacio entre la imagen y el texto */
+  vertical-align: middle; /* Alinea las imágenes verticalmente */
+}
+
 
 tbody td:last-child {
     width: 100px;
@@ -409,19 +420,41 @@ tbody td:last-child {
     object-fit: cover;
 }
 
+/* Estilo para los botones de acciones */
 .btn-testimonios {
-    text-decoration: none;
-    background-color: #0f1035;
-    color: #f0eded;
-    border-radius: 10px;
-    font-size: 14px;
-    padding: 8px 10px;
-    font-weight: 600;
-    transition: background-color 0.3s ease;
-    display: inline-block;
-    margin: 0 auto;
+  background-color: #365486; /* Fondo azul oscuro */
+  color: #ffffff; /* Texto blanco */
+  border-radius: 5px;
+  font-size: 14px;
+  padding: 8px 12px;
+  text-decoration: none;
+  font-weight: bold;
+  display: inline-block;
+  margin: 0 5px; /* Ajusta el margen entre botones */
 }
 
 .btn-testimonios:hover {
-    background-color: #365486;
+  background-color: #6c00bd; /* Fondo al hacer hover */
+}
+
+
+/* Icono para las flechas de ordenamiento en las columnas */
+thead th span.icon-arrow {
+  display: inline-block;
+  width: 1.3rem;
+  height: 1.3rem;
+  border-radius: 50%;
+  border: 1.4px solid transparent;
+  text-align: center;
+  font-size: 1rem;
+  margin-left: .5rem;
+  transition: .2s ease-in-out;
+}
+
+thead th:hover span.icon-arrow {
+  border: 1.4px solid #365486; /* Efecto al hover de las flechas */
+}
+
+thead th:hover {
+  color: #365486; /* Cambia el color del texto cuando se hace hover */
 }

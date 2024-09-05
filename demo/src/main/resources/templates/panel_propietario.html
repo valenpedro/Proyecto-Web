@@ -104,13 +104,13 @@
                 <table>
                     <thead>
                         <tr>
-                            <th>ID</th>
-                            <th>Nombre</th>
-                            <th>Raza</th>
-                            <th>Edad</th>
-                            <th>Foto</th>
-                            <th>Estado</th>
-                            <th>Detalles</th>
+                            <th>ID <span class="icon-arrow">&UpArrow;</span></th>
+                            <th>Nombre <span class="icon-arrow">&UpArrow;</span></th>
+                            <th>Raza <span class="icon-arrow">&UpArrow;</span></th>
+                            <th>Edad <span class="icon-arrow">&UpArrow;</span></th>
+                            <th>Foto <span class="icon-arrow">&UpArrow;</span></th>
+                            <th>Estado <span class="icon-arrow">&UpArrow;</span></th>
+                            <th>Detalles <span class="icon-arrow">&UpArrow;</span></th>
                         </tr>
                     </thead>
                     <tbody>
@@ -136,7 +136,31 @@
             sections.forEach(section => section.style.display = 'none');
             document.getElementById(sectionId).style.display = 'block';
         }
+    
+        // Mostrar automáticamente la sección al cargar la página
+        window.onload = function() {
+            // Verifica si el hash de la URL coincide con una sección
+            const hash = window.location.hash.replace('#', '');
+            
+            // Si el hash coincide con una sección, mostrar esa sección
+            if (hash) {
+                showSection(hash);
+            } else {
+                // Si no hay hash, redirigir al panel por defecto
+                showSection('panel');
+                window.location.hash = '#panel'; // Añadir el hash a la URL
+            }
+        }
+    
+        // Manejar el evento de retroceso del navegador para mostrar la sección correcta
+        window.onhashchange = function() {
+            const hash = window.location.hash.replace('#', '');
+            if (hash) {
+                showSection(hash);
+            }
+        }
     </script>
+    
     <img
         src="/images/footer.png"
         alt="Footer Decorativo"
