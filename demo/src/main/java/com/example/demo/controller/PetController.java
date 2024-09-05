@@ -62,24 +62,35 @@ public class PetController {
             Pet pet = petOpt.get();
             Object usuarioLogueado = session.getAttribute("usuarioLogueado");
 
-            if (isVeterinario(session) || (esPropietarioDeLaMascota((Propietario) usuarioLogueado, pet))) {
-                Veterinario veterinario = (Veterinario) session.getAttribute("usuarioLogueado");
+            // Verifica si el usuario logueado es un veterinario
+            if (usuarioLogueado instanceof Veterinario) {
+                Veterinario veterinario = (Veterinario) usuarioLogueado;
                 model.addAttribute("primerNombre", veterinario.getNombre().split(" ")[0]);
-
                 model.addAttribute("pet", pet);
                 model.addAttribute("propietario", pet.getPropietario());
-
-                logger.info("Displaying details for pet: {} and its owner: {}", pet, pet.getPropietario());
                 return "pet-details";
+
+            // Verifica si el usuario logueado es un propietario
+            } else if (usuarioLogueado instanceof Propietario) {
+                Propietario propietario = (Propietario) usuarioLogueado;
+
+                // Verifica que el propietario sea el dueño de la mascota
+                if (esPropietarioDeLaMascota(propietario, pet)) {
+                    model.addAttribute("primerNombre", propietario.getNombre().split(" ")[0]);
+                    model.addAttribute("pet", pet);
+                    model.addAttribute("propietario", pet.getPropietario());
+                    return "pet-details";
+                } else {
+                    return "redirect:/login"; // Redirige si no es el dueño de la mascota
+                }
             } else {
-                logger.warn("User is not authorized to view this pet's details");
-                return "redirect:/login";
+                return "redirect:/login"; // Redirige si el usuario logueado no es ni veterinario ni propietario
             }
         } else {
-            logger.warn("Pet with id: {} not found", id);
-            return "redirect:/pets";
+            return "redirect:/pets"; // Redirige si la mascota no se encuentra
         }
     }
+
 
     @GetMapping("/new")
     public String showCreatePetForm(Model model, HttpSession session) {
