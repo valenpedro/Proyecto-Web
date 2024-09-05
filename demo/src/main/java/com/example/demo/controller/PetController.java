@@ -11,17 +11,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
 @Controller
 @RequestMapping("/pets")
 public class PetController {
 
     private static final Logger logger = LoggerFactory.getLogger(PetController.class);
-
     private final PetService petService;
     private final PropietarioService propietarioService;
 
@@ -37,11 +36,6 @@ public class PetController {
         return session.getAttribute("usuarioLogueado") instanceof Veterinario;
     }
 
-    // Verifica si el usuario es un propietario
-    private boolean isPropietario(HttpSession session) {
-        return session.getAttribute("usuarioLogueado") instanceof Propietario;
-    }
-
     // Verifica si el propietario logueado es el dueño de la mascota
     private boolean esPropietarioDeLaMascota(Propietario propietarioLogueado, Pet pet) {
         return propietarioLogueado != null && pet.getPropietario().getCedula().equals(propietarioLogueado.getCedula());
@@ -54,8 +48,8 @@ public class PetController {
         }
         logger.info("Request to view all pets");
         Veterinario veterinario = (Veterinario) session.getAttribute("usuarioLogueado");
-        model.addAttribute("primerNombre", veterinario.getNombre().split(" ")[0]); // Agrega el primer nombre
-    
+        model.addAttribute("primerNombre", veterinario.getNombre().split(" ")[0]);
+
         List<Pet> pets = petService.getAllPets();
         model.addAttribute("pets", pets);
         return "pets";
@@ -68,28 +62,24 @@ public class PetController {
             Pet pet = petOpt.get();
             Object usuarioLogueado = session.getAttribute("usuarioLogueado");
 
-            // Aseguramos que el usuario logueado sea un veterinario o el propietario de la mascota
-            if (isVeterinario(session) || (isPropietario(session) && esPropietarioDeLaMascota((Propietario) usuarioLogueado, pet))) {
+            if (isVeterinario(session) || (esPropietarioDeLaMascota((Propietario) usuarioLogueado, pet))) {
                 Veterinario veterinario = (Veterinario) session.getAttribute("usuarioLogueado");
-                model.addAttribute("primerNombre", veterinario.getNombre().split(" ")[0]); // Agregamos el primer nombre del veterinario
+                model.addAttribute("primerNombre", veterinario.getNombre().split(" ")[0]);
 
-                model.addAttribute("pet", pet); // Información de la mascota
-                model.addAttribute("propietario", pet.getPropietario()); // Información del propietario
+                model.addAttribute("pet", pet);
+                model.addAttribute("propietario", pet.getPropietario());
 
-                // Aquí puedes agregar cualquier otro dato del propietario si es necesario, como su nombre, teléfono, etc.
                 logger.info("Displaying details for pet: {} and its owner: {}", pet, pet.getPropietario());
-                
-                return "pet-details"; // Retorna la vista que mostrará los detalles de la mascota y del propietario
+                return "pet-details";
             } else {
                 logger.warn("User is not authorized to view this pet's details");
-                return "redirect:/login"; // Redirige a login si no está autorizado
+                return "redirect:/login";
             }
         } else {
             logger.warn("Pet with id: {} not found", id);
-            return "redirect:/pets"; // Redirige si la mascota no se encuentra
+            return "redirect:/pets";
         }
     }
-
 
     @GetMapping("/new")
     public String showCreatePetForm(Model model, HttpSession session) {
@@ -97,7 +87,7 @@ public class PetController {
             return "redirect:/login";
         }
         Veterinario veterinario = (Veterinario) session.getAttribute("usuarioLogueado");
-        model.addAttribute("primerNombre", veterinario.getNombre().split(" ")[0]); // Agrega el primer nombre
+        model.addAttribute("primerNombre", veterinario.getNombre().split(" ")[0]);
 
         model.addAttribute("pet", new Pet());
         List<Propietario> propietarios = propietarioService.findAll();
@@ -106,9 +96,8 @@ public class PetController {
         return "pet-form";
     }
 
-
-    @PostMapping
-    public String savePet(@ModelAttribute Pet pet, Model model, HttpSession session) {
+    @PostMapping("/new")
+    public String saveNewPet(@ModelAttribute Pet pet, Model model, HttpSession session) {
         if (!isVeterinario(session)) {
             return "redirect:/login";
         }
@@ -134,7 +123,7 @@ public class PetController {
             return "redirect:/login";
         }
         Veterinario veterinario = (Veterinario) session.getAttribute("usuarioLogueado");
-        model.addAttribute("primerNombre", veterinario.getNombre().split(" ")[0]); // Agrega el primer nombre
+        model.addAttribute("primerNombre", veterinario.getNombre().split(" ")[0]);
 
         Optional<Pet> pet = petService.getPetById(id);
         if (pet.isPresent()) {
@@ -147,7 +136,6 @@ public class PetController {
             return "redirect:/pets";
         }
     }
-
 
     @PostMapping("/edit/{id}")
     public String updatePet(@PathVariable int id, @ModelAttribute Pet petDetails, Model model, HttpSession session) {
