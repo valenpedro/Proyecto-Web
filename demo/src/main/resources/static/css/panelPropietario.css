@@ -21,12 +21,10 @@ body {
     align-items: center;
 }
 main.table {
-  position: fixed;
   width: 125vw;
   height: 90vh;
   border-radius: .8rem;
   overflow: hidden;
-  margin-right: 500px; /* Ajusta este valor según sea necesario */
 }
 
 .form-title {
@@ -88,8 +86,9 @@ main.table {
 
 
 table {
-  width: 100%; /* Cambia esto de 70% a 100% */
-  margin: 0; /* Elimina el margen automático */
+  width: 70%; /* Cambia esto de 70% a 100% */
+  margin: 250px; /* Elimina el margen automático */
+  margin-top: 200px;
 }
 
 td img {
