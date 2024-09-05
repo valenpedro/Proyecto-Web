@@ -11,17 +11,16 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Optional;
-
 @Controller
 @RequestMapping("/pets")
 public class PetController {
 
     private static final Logger logger = LoggerFactory.getLogger(PetController.class);
-
     private final PetService petService;
     private final PropietarioService propietarioService;
 
@@ -37,11 +36,6 @@ public class PetController {
         return session.getAttribute("usuarioLogueado") instanceof Veterinario;
     }
 
-    // Verifica si el usuario es un propietario
-    private boolean isPropietario(HttpSession session) {
-        return session.getAttribute("usuarioLogueado") instanceof Propietario;
-    }
-
     // Verifica si el propietario logueado es el dueño de la mascota
     private boolean esPropietarioDeLaMascota(Propietario propietarioLogueado, Pet pet) {
         return propietarioLogueado != null && pet.getPropietario().getCedula().equals(propietarioLogueado.getCedula());
@@ -53,6 +47,9 @@ public class PetController {
             return "redirect:/login";
         }
         logger.info("Request to view all pets");
+        Veterinario veterinario = (Veterinario) session.getAttribute("usuarioLogueado");
+        model.addAttribute("primerNombre", veterinario.getNombre().split(" ")[0]);
+
         List<Pet> pets = petService.getAllPets();
         model.addAttribute("pets", pets);
         return "pets";
@@ -65,36 +62,50 @@ public class PetController {
             Pet pet = petOpt.get();
             Object usuarioLogueado = session.getAttribute("usuarioLogueado");
 
-            if (isVeterinario(session) || (isPropietario(session) && esPropietarioDeLaMascota((Propietario) usuarioLogueado, pet))) {
-                model.addAttribute("pet", pet);
-                model.addAttribute("propietario", pet.getPropietario());
-                logger.info("Displaying details for pet: {}", pet);
-                return "pet-details";
-            } else {
-                logger.warn("User is not authorized to view this pet's details");
-                return "redirect:/login";
+            // Verifica si el usuario logueado es un veterinario
+            if (usuarioLogueado instanceof Veterinario) {
+                Veterinario veterinario = (Veterinario) usuarioLogueado;
+                model.addAttribute("primerNombre", veterinario.getNombre().split(" ")[0]);
             }
+
+            // Verifica si el usuario logueado es un propietario
+            else if (usuarioLogueado instanceof Propietario) {
+                Propietario propietario = (Propietario) usuarioLogueado;
+                if (!esPropietarioDeLaMascota(propietario, pet)) {
+                    return "redirect:/login";
+                }
+                model.addAttribute("primerNombre", propietario.getNombre().split(" ")[0]);
+            }
+
+            // Añade la mascota y su propietario al modelo
+            model.addAttribute("pet", pet);
+            model.addAttribute("propietario", pet.getPropietario());
+
+            return "pet-details";
         } else {
-            logger.warn("Pet with id: {} not found", id);
-            return "redirect:/pets";
+            return "redirect:/pets"; // Redirige si la mascota no se encuentra
         }
     }
+
+
 
     @GetMapping("/new")
     public String showCreatePetForm(Model model, HttpSession session) {
         if (!isVeterinario(session)) {
             return "redirect:/login";
         }
-        logger.info("Request to show form to create a new pet");
+        Veterinario veterinario = (Veterinario) session.getAttribute("usuarioLogueado");
+        model.addAttribute("primerNombre", veterinario.getNombre().split(" ")[0]);
+
         model.addAttribute("pet", new Pet());
         List<Propietario> propietarios = propietarioService.findAll();
         model.addAttribute("propietarios", propietarios);
-        model.addAttribute("isEdit", false); // Añadir esta línea para configurar isEdit
+        model.addAttribute("isEdit", false);
         return "pet-form";
     }
 
-    @PostMapping
-    public String savePet(@ModelAttribute Pet pet, Model model, HttpSession session) {
+    @PostMapping("/new")
+    public String saveNewPet(@ModelAttribute Pet pet, Model model, HttpSession session) {
         if (!isVeterinario(session)) {
             return "redirect:/login";
         }
@@ -119,7 +130,9 @@ public class PetController {
         if (!isVeterinario(session)) {
             return "redirect:/login";
         }
-        logger.info("Request to show form to edit pet with id: {}", id);
+        Veterinario veterinario = (Veterinario) session.getAttribute("usuarioLogueado");
+        model.addAttribute("primerNombre", veterinario.getNombre().split(" ")[0]);
+
         Optional<Pet> pet = petService.getPetById(id);
         if (pet.isPresent()) {
             model.addAttribute("pet", pet.get());
@@ -128,7 +141,6 @@ public class PetController {
             model.addAttribute("isEdit", true);
             return "pet-form";
         } else {
-            logger.warn("Pet with id: {} not found, cannot edit", id);
             return "redirect:/pets";
         }
     }

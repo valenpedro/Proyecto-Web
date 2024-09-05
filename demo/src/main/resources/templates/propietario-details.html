@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalles del Propietario</title>
+    <link rel="stylesheet" href="/css/index.css">
+    <link rel="stylesheet" href="/css/propietario-details.css">
+</head>
+<body>
+    
+    <main>
+        <h1 class="servicios">DETALLES DEL PROPIETARIO</h1>
+        <div class="container">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Información del Propietario</h5>
+                    <p>Cédula: <span th:text="${propietario.cedula}"></span></p>
+                    <p>Nombre: <span th:text="${propietario.nombre}"></span></p>
+                    <p>Correo: <span th:text="${propietario.correo}"></span></p>
+                    <p>Celular: <span th:text="${propietario.celular}"></span></p>
+                </div>
+            </div>
+            
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Mascotas</h5>
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Nombre</th>
+                                    <th>Raza</th>
+                                    <th>Edad</th>
+                                    <th>Estado</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr th:each="mascota : ${mascotas}">
+                                    <td th:text="${mascota.id}"></td>
+                                    <td th:text="${mascota.name}"></td>
+                                    <td th:text="${mascota.breed}"></td>
+                                    <td th:text="${mascota.age}"></td>
+                                    <td th:text="${mascota.status}"></td>
+                                    <td>
+                                        <a th:href="@{/pets/{id}(id=${mascota.id})}" class="btn-detalles">Ver Detalles</a>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <a href="javascript:window.history.back();" class="btn-testimonios">Volver</a>
+        </div>
+    </main>
+
+    <script src="/JavaScript/script.js" defer></script>
+</body>
+</html>

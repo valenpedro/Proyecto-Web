@@ -121,8 +121,11 @@ public class LoginController {
         if (veterinario == null) {
             return "redirect:/login";
         }
+        // Añadimos el primer nombre del veterinario al modelo
+        model.addAttribute("primerNombre", veterinario.getNombre().split(" ")[0]);
         return "panelveterinario";
     }
+
 
     @GetMapping("/panel_administrador")
     public String panelAdministrador(Model model, HttpSession session) {

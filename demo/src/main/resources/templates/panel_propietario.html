@@ -7,15 +7,11 @@
     <title>Panel del Propietario - Dogin</title>
 
     <!-- Font Awesome -->
-    <link
-        rel="stylesheet"
-        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"/>
+    <script src="/JavaScript/sidebar.js" defer></script>
 
     <!-- CSS File -->
     <link rel="stylesheet" href="/css/sidebar.css" />
-    <link rel="stylesheet" href="/css/panelpropietarios.css" />
-
 </head>
 <body>
     <img
@@ -101,17 +97,8 @@
             <p>Aquí va el contenido del historial...</p>
         </section>
 
-        <img src="/images/Iconocasita.png" alt="icono" class="iconoModificar" />
-
-
-        <header id="header">
-            <h1 class="form-title">INICIO</h1>
-            <img src="/images/PerroGato.png" alt="icono" class="Veteyperro" />
-        </header>
-
         <!-- Sección de Mis Mascotas -->
         <section id="mis-mascotas" class="content-section" style="display: none;">
-            <h2>Mis Mascotas</h2>
             <div class="container">
                 <table>
                     <thead>
@@ -133,7 +120,7 @@
                             <td th:text="${pet.age}"></td>
                             <td><img th:src="${pet.photoUrl}" alt="Foto de Mascota" class="pet-photo"></td>
                             <td th:text="${pet.status}"></td>
-                            <td><a th:href="@{/pets/{id}(id=${pet.id})}" class="btn-testimonios">Ver Detalles</a></td>
+                            <td><a th:href="@{/pets/{id}(id=${pet.id})}" class="btn-editar">Ver Detalles</a></td>
                         </tr>
                     </tbody>                    
                 </table>

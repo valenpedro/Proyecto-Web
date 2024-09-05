@@ -1,0 +1,147 @@
+/* Estilos globales */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+    background-color: #DCF2F1;
+    overflow-x: hidden; /* Evitar el scroll horizontal en todo el documento */
+}
+
+/* Contenedor principal */
+.container {
+    margin: 20px auto;
+    padding: 20px;
+    background: linear-gradient(135deg, #fff, #f9f9f9);
+    border-radius: 25px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    width: max-content; /* Ajusta el contenedor al contenido */
+    max-width: 100%; /* Evitar que crezca más que el viewport */
+    overflow-x: auto; /* Para que en caso de que la tabla sea más grande, haga scroll horizontal */
+}
+
+/* Título principal */
+h1.servicios {
+    font-size: 45px;
+    font-weight: 900;
+    color: #0f1035;
+    margin-bottom: 30px;
+    text-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
+    text-align: center; /* Centrar el título */
+    margin-top: 25px;
+    margin-right: 0px;
+}
+
+/* Contenedor de las tarjetas */
+.card {
+    background: linear-gradient(135deg, #f3f3f3, #ffffff);
+    margin-top: 20px;
+    border-radius: 25px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    text-align: center;
+}
+h5 {
+    font-size: 35px;
+    font-weight: 600;
+    color: #0f1035;
+    margin-top: 20px;
+    margin-bottom: -15px;
+}
+
+/* Título del nombre del perro */
+h5.card-title {
+    font-size: 45px; /* Incrementa el tamaño de la fuente aquí */
+    font-weight: 700;
+    color: #365486;
+    margin-top: 20px;
+    margin-bottom: 0px;
+}
+/* Información dentro de las tarjetas */
+.card-body p {
+    margin: 10px 0;
+    font-size: 18px;
+    color: #0f1035;
+    text-align: center;
+}
+
+/* Tabla dentro del contenedor */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 0 auto;
+}
+
+th, td {
+    padding: 10px;
+    text-align: center;
+    border-bottom: 1px solid #ddd;
+    word-wrap: break-word;
+}
+
+/* Estilo de los botones */
+.btn-detalles {
+    background-color: #365486;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
+    transition: background-color 0.3s ease;
+}
+
+.btn-detalles:hover {
+    background-color: #253b6d;
+}
+
+/* Botón de volver */
+.btn-testimonios {
+    background-color: #0f1035;
+    color: #f0eded;
+    border-radius: 25px;
+    font-size: 18px;
+    padding: 15px 30px;
+    display: block;
+    margin-top: 20px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+    text-decoration: none;
+    max-width: 200px;
+}
+
+.btn-testimonios:hover {
+    background-color: #365486;
+}
+
+/* Footer decorativo */
+.footer-decorativa {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: auto;
+    z-index: -1;
+    background-color: transparent;
+}
+
+/* Responsividad */
+@media (max-width: 768px) {
+    .container {
+        width: 90%; /* Asegura que ocupe un 90% de la pantalla en móviles */
+    }
+
+    h1.servicios {
+        font-size: 35px;
+    }
+
+    .btn-testimonios {
+        font-size: 16px;
+        padding: 10px 20px;
+    }
+
+    th, td {
+        font-size: 14px; /* Ajustar el tamaño de la fuente en pantallas pequeñas */
+    }
+}
