@@ -290,6 +290,15 @@ thead th.active,tbody td.active {
     height: auto; /* Mantén la proporción de la imagen */
 }
 
+.casita {
+  position: fixed; /* Posiciona la imagen de manera absoluta */
+  top: -50px; /* Ajusta según donde quieras que se muestre */
+  left: 850px; /* Ajusta según donde quieras que se muestre */
+  z-index: 20; /* Asegura que la imagen esté por encima de la barra decorativa */
+  width: 500px; /* Ajusta el tamaño según sea necesario */
+  height: auto; /* Mantén la proporción de la imagen */
+}
+
 .iconoEdit{
     position: fixed; /* Posiciona la imagen de manera absoluta */
     top: 250px; /* Ajusta según donde quieras que se muestre */
@@ -634,4 +643,71 @@ thead th.active,tbody td.active {
 /* Cuando el sidebar está abierto */
 .sidebar.close ~ .home-section .home-content i.fa-bars {
   transform: translateX(20px); /* Ajusta este valor según sea necesario */
+}
+
+/* Contenedor principal que divide la pantalla en dos */
+.panel-container {
+  display: flex;
+  width: 100%;
+  height: 100vh; /* Toda la altura de la ventana */
+  position: relative;
+}
+
+/* Estilos para la parte izquierda */
+.left-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 40px;
+  background-color: transparent;
+  position: relative;
+}
+
+.welcome-title {
+  font-size: 92px; /* Letra más grande */
+  color: #365486;
+  font-weight: bold;
+  text-align: left;
+  margin-top: 100px; /* Ajusta la posición hacia abajo */
+}
+
+.main-image {
+  max-width: 100%;
+  height: auto;
+  position: absolute;
+  bottom: 0; /* Mantén la imagen en la parte inferior */
+  left: 0; /* Alineada a la izquierda */
+  border-radius: 15%;
+  max-height: 500px; /* Ajusta el tamaño máximo para que no se salga de la pantalla */
+}
+
+/* Estilos para la parte derecha */
+.right-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 60px;
+  background-color: transparent;
+  margin-top: 150px;
+}
+
+.bullet-point {
+  display: flex;
+  align-items: center;
+  margin-bottom: 25px; /* Aumenta el espacio entre bullet points */
+}
+
+.bullet-image {
+  width: 300px;
+  height: auto;
+  margin-right: 20px;
+}
+
+.bullet-point p {
+  font-size: 30px; /* Agranda el texto */
+  color: #333;
+  margin: 0;
+  line-height: 1.3;
 }
